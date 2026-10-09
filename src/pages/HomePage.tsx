@@ -153,7 +153,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
       <AiReadinessQuiz onOpenSampleModal={onOpenSampleModal} />
 
       {/* FAQ Accordion Section */}
-      <section className="py-20 bg-canvas relative overflow-hidden transition-colors">
+      <section className="py-20 bg-canvas border-t border-rule relative overflow-hidden transition-colors">
         <div className="container-edit max-w-4xl">
           
           <div className="text-center mb-12 space-y-3">

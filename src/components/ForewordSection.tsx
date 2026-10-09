@@ -4,8 +4,11 @@ import { FOREWORD_TEXT, BOOK_INFO } from '../data/bookData';
 
 export const ForewordSection: React.FC = () => {
   return (
-    <section className="py-16 md:py-20 relative overflow-hidden bg-canvas transition-colors">
-      <div className="container-edit">
+    <section className="py-20 md:py-24 relative isolate overflow-hidden bg-canvas bg-premium-side-gradient transition-colors">
+      {/* Alternating light-mode grid */}
+      <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+
+      <div className="container-edit relative">
         
         <div className="relative rounded-3xl border border-rule bg-sand/40 dark:bg-sand/20 p-8 sm:p-12 shadow-soft backdrop-blur-xl overflow-hidden">
           
