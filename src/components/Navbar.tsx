@@ -63,7 +63,8 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
       <motion.div
         layout
         style={{
-          willChange: "width, max-width, padding",
+          willChange: "transform, width, max-width",
+          transform: "translateZ(0)",
           backgroundImage: open
             ? "var(--header-bg-open)"
             : scrolled
@@ -71,14 +72,14 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               : "var(--header-bg-top)",
           boxShadow: scrolled ? "var(--header-shadow)" : "var(--header-shadow-top)",
         }}
-        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color,max-width,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
+        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
             ? "max-w-2xl rounded-[2.25rem] p-5 border-white/40"
             : scrolled
               ? "max-w-5xl rounded-full py-2 px-3.5 min-[400px]:px-4 md:px-6 border-white/40"
               : "max-w-[70rem] rounded-full py-3.5 px-4 min-[400px]:px-6 md:px-8 border-white/25"
           }`}
         transition={{
-          duration: 0.32,
+          duration: 0.35,
           ease: [0.16, 1, 0.3, 1]
         }}
       >
@@ -121,29 +122,50 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
           <div className="flex shrink-0 items-center gap-2">
             <ThemeToggle />
             <div className="hidden lg:block">
-              <a
+              <motion.a
+                layout
                 href={BOOK_INFO.kindleLink}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Get on Amazon"
                 title="Get on Amazon"
-                className={`btn-premium group inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 ${
+                className={`btn-premium group inline-flex items-center justify-center rounded-full font-semibold ${
                   scrolled
                     ? "h-9 w-9 p-0 shadow-sm"
-                    : "h-10 px-5 text-xs gap-2 shadow-md"
+                    : "h-10 px-5 text-xs shadow-md"
                 }`}
+                transition={{
+                  duration: 0.32,
+                  ease: [0.16, 1, 0.3, 1]
+                }}
               >
-                <span className="relative z-10 flex items-center justify-center">
+                <AnimatePresence mode="popLayout" initial={false}>
                   {scrolled ? (
-                    <AmazonIcon className="h-4.5 w-4.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                    <motion.span
+                      key="amazon-icon"
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.6 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative z-10 flex items-center justify-center"
+                    >
+                      <AmazonIcon className="h-4.5 w-4.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                    </motion.span>
                   ) : (
-                    <span className="flex items-center gap-2">
+                    <motion.span
+                      key="amazon-text"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.85 }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative z-10 flex items-center gap-2 whitespace-nowrap"
+                    >
                       <span>Get on Amazon</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </span>
+                    </motion.span>
                   )}
-                </span>
-              </a>
+                </AnimatePresence>
+              </motion.a>
             </div>
             <motion.button
               type="button"
