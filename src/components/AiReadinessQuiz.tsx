@@ -5,9 +5,15 @@ import { QUIZ_QUESTIONS, BOOK_INFO } from '../data/bookData';
 
 interface AiReadinessQuizProps {
   onOpenSampleModal: () => void;
+  bgVariant?: 'grid' | 'canvas';
+  hideHeading?: boolean;
 }
 
-export const AiReadinessQuiz: React.FC<AiReadinessQuizProps> = ({ onOpenSampleModal }) => {
+export const AiReadinessQuiz: React.FC<AiReadinessQuizProps> = ({
+  onOpenSampleModal,
+  bgVariant = 'grid',
+  hideHeading = false,
+}) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -67,27 +73,40 @@ export const AiReadinessQuiz: React.FC<AiReadinessQuizProps> = ({ onOpenSampleMo
     };
   }
 
+  const isGrid = bgVariant === 'grid';
+
   return (
-    <section id="quiz" className="py-20 md:py-24 relative isolate overflow-hidden bg-premium-side-gradient border-t border-rule transition-colors">
+    <section
+      id="quiz"
+      className={`py-20 md:py-24 relative isolate overflow-hidden transition-colors ${
+        isGrid
+          ? 'bg-canvas bg-premium-side-gradient border-t border-rule'
+          : 'bg-canvas border-y border-rule'
+      }`}
+    >
       {/* Alternating light-mode grid */}
-      <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+      {isGrid && (
+        <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+      )}
 
       <div className="container-edit relative max-w-4xl">
         
         {/* Header */}
-        <div className="text-center mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2">
-            <span className="eyebrow eyebrow-indigo">
-              <Zap className="w-3.5 h-3.5 text-accent" /> Interactive Assessment
-            </span>
+        {!hideHeading && (
+          <div className="text-center mb-12 space-y-3">
+            <div className="inline-flex items-center gap-2">
+              <span className="eyebrow eyebrow-indigo">
+                <Zap className="w-3.5 h-3.5 text-accent" /> Interactive Assessment
+              </span>
+            </div>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink tracking-tight">
+              AI Business Readiness & <span className="text-gradient-brand">ROI Scorecard</span>
+            </h2>
+            <p className="text-ink-soft text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+              Answer 4 quick diagnostic questions to evaluate your company's AI maturity level and receive a customized reading roadmap from Accelerate with AI.
+            </p>
           </div>
-          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink tracking-tight">
-            AI Business Readiness & <span className="text-gradient-brand">ROI Scorecard</span>
-          </h2>
-          <p className="text-ink-soft text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Answer 4 quick diagnostic questions to evaluate your company's AI maturity level and receive a customized reading roadmap from Accelerate with AI.
-          </p>
-        </div>
+        )}
 
         {/* Quiz Container Card */}
         <div className="relative rounded-3xl bg-sand/40 dark:bg-sand/20 border border-rule p-6 sm:p-10 shadow-soft backdrop-blur-xl">

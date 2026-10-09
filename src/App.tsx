@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Lenis from 'lenis';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -15,6 +16,39 @@ export function App() {
   const [activePage, setActivePage] = useState<string>('home');
   const [isSampleModalOpen, setIsSampleModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Initialize Lenis smooth scroll for desktop version
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Disable on mobile/touch devices for native, lag-free performance
+    const isMobileDevice =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+      window.matchMedia('(max-width: 1023px)').matches;
+    if (isMobileDevice) return;
+
+    const lenis = new Lenis({
+      duration: 0.9,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1.15,
+    });
+
+    let rafId: number;
+    function raf(time: number) {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    }
+
+    rafId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   // Sync hash with page
   useEffect(() => {
