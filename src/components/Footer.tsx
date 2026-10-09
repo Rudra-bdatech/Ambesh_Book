@@ -51,46 +51,53 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onShowToast }) =>
   return (
     <footer className="border-t border-rule bg-canvas relative overflow-hidden transition-colors duration-300">
       <div className="container-edit pt-16 pb-12">
-        {/* Top: Newsletter / Toolkit CTA Bar */}
-        <div className="mb-14 rounded-3xl border border-rule bg-sand/40 dark:bg-sand/20 p-8 md:p-10 backdrop-blur-xl relative overflow-hidden">
-          <div className="relative z-10 grid gap-8 lg:grid-cols-12 lg:items-center">
+        {/* Top: Premium Dark CTA Panel (Exact Ambesh V2 Style with Toolkit Content) */}
+        <div className="cta-dark mb-14 rounded-3xl p-8 sm:p-12 md:p-14 shadow-lift relative overflow-hidden">
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+            
+            {/* Left Column */}
             <div className="lg:col-span-7">
-              <span className="eyebrow eyebrow-indigo">Free Companion Resource</span>
-              <h3 className="mt-4 font-display text-2xl md:text-3xl font-extrabold tracking-tight text-ink">
-                Get the Official 50+ AI Prompts & SOP Toolkit
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
+                FREE COMPANION RESOURCE
+              </p>
+              
+              <h3 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-white">
+                Get the Official 50+ <span className="font-serif italic text-gradient-brand">AI Prompts & SOP</span> Toolkit
               </h3>
-              <p className="mt-2 text-sm md:text-base text-ink-soft max-w-xl">
+
+              <p className="mt-3 text-sm sm:text-base text-white/70 max-w-xl leading-relaxed">
                 Every reader gets instant access to Ambesh Tiwari's actionable frameworks, workflow templates, and executive prompt library.
               </p>
             </div>
+
+            {/* Right Column: Form */}
             <div className="lg:col-span-5">
               {subscribed ? (
-                <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400">
+                <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300">
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
-                  <span className="text-sm font-semibold">Check your inbox! Toolkit sent successfully.</span>
+                  <span className="text-sm font-semibold">Check your inbox! 50+ Prompts Toolkit sent successfully.</span>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2.5">
-                  <div className="relative flex-grow">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-muted" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your work email..."
-                      className="w-full rounded-full border border-rule bg-canvas pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent"
-                      required
-                    />
-                  </div>
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your work email..."
+                    className="h-12 sm:h-14 flex-1 rounded-full border border-white/15 bg-white/5 px-6 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none backdrop-blur-sm"
+                    required
+                  />
                   <button
                     type="submit"
-                    className="btn-premium rounded-full px-6 py-3 text-sm font-semibold shrink-0"
+                    className="btn-premium inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold shrink-0 text-white shadow-soft"
                   >
-                    Get Free Toolkit
+                    <Mail className="h-4 w-4" />
+                    <span>Get Free Toolkit</span>
                   </button>
                 </form>
               )}
             </div>
+
           </div>
         </div>
 
