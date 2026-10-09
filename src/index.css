@@ -172,7 +172,7 @@
 .dark {
   color-scheme: dark;
 
-  /* Dark surfaces — deep navy-blue scale */
+  /* Dark surfaces — deep luxury navy scale */
   --canvas: #071123;
   --ink: #bbe0fa;
   --ink-soft: rgba(187, 224, 250, 0.8);
@@ -180,10 +180,10 @@
   --curtain-text-gradient: linear-gradient(90deg, #9ca3af 0%, #ffffff 25%, #9ca3af 50%, #ffffff 75%, #9ca3af 100%);
   --curtain-text-stroke: rgba(255, 255, 255, 0.8);
   --curtain-text-shadow: rgba(255, 255, 255, 0.3);
-  --sand: #0e4c75;
-  --sand-deep: #115c8c;
-  --rule: rgba(187, 224, 250, 0.14);
-  --section-alt: #0c1b30;
+  --sand: rgba(187, 224, 250, 0.04);
+  --sand-deep: rgba(187, 224, 250, 0.08);
+  --rule: rgba(187, 224, 250, 0.12);
+  --section-alt: #0a172a;
 
   /* Brand: ocean-blue primary -> sky-blue gradient, green success marks */
   --accent: #3282b7;
@@ -200,15 +200,15 @@
   /* shadcn token map */
   --background: var(--canvas);
   --foreground: var(--ink);
-  --card: var(--sand);
+  --card: rgba(187, 224, 250, 0.04);
   --card-foreground: var(--ink);
-  --popover: var(--sand);
+  --popover: #0a172a;
   --popover-foreground: var(--ink);
   --primary: var(--accent);
   --primary-foreground: #ffffff;
-  --secondary: var(--sand);
+  --secondary: rgba(187, 224, 250, 0.05);
   --secondary-foreground: var(--ink);
-  --muted: var(--sand);
+  --muted: rgba(187, 224, 250, 0.05);
   --muted-foreground: var(--ink-muted);
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
@@ -217,8 +217,8 @@
   --ring: var(--accent);
 
   /* Core pillar cards */
-  --pillar-card-bg: rgba(187, 224, 250, 0.06);
-  --pillar-card-border: rgba(187, 224, 250, 0.14);
+  --pillar-card-bg: rgba(187, 224, 250, 0.04);
+  --pillar-card-border: rgba(187, 224, 250, 0.12);
   --pillar-card-shadow: none;
 
   /* Floating header glass — deep navy, blue-lit */
@@ -1699,15 +1699,15 @@ html.lenis body {
     display: none !important;
   }
 
-  /* Cards -> deep ocean-blue surface with hairline border */
+  /* Cards -> deep luxury dark glass surface with hairline border */
   .dark .custom-theme-card,
   .dark .custom-theme-card-static {
-    background-color: #0e4c75 !important;
+    background-color: rgba(187, 224, 250, 0.04) !important;
     background-image: none !important;
-    border: 1px solid rgba(187, 224, 250, 0.14) !important;
-    box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.55) !important;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    border: 1px solid rgba(187, 224, 250, 0.12) !important;
+    box-shadow: 0 12px 36px -12px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .dark

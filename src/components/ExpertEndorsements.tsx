@@ -10,8 +10,11 @@ export const ExpertEndorsements: React.FC = () => {
     : TESTIMONIALS.filter(t => t.category === activeFilter);
 
   return (
-    <section id="wall-of-love" className="py-20 md:py-24 bg-canvas border-t border-rule relative overflow-hidden transition-colors">
-      <div className="container-edit">
+    <section id="wall-of-love" className="py-20 md:py-24 relative isolate overflow-hidden bg-premium-side-gradient border-t border-rule transition-colors">
+      {/* Alternating light-mode grid */}
+      <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+
+      <div className="container-edit relative">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">

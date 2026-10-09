@@ -56,8 +56,11 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
   };
 
   return (
-    <section id="pillars" className="py-20 md:py-24 relative overflow-hidden bg-canvas transition-colors">
-      <div className="container-edit">
+    <section id="pillars" className="py-20 md:py-24 relative isolate overflow-hidden bg-premium-side-gradient transition-colors">
+      {/* Alternating light-mode grid */}
+      <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+
+      <div className="container-edit relative">
         
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">

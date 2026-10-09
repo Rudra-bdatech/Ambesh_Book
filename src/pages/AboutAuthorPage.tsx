@@ -45,8 +45,9 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
     <div className="pt-32 pb-24 space-y-20 bg-canvas text-ink transition-colors">
       
       {/* Hero / Overview Header */}
-      <section className="relative">
-        <div className="container-edit">
+      <section className="premium-canvas bg-premium-side-gradient relative isolate overflow-hidden pb-12">
+        <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+        <div className="container-edit relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Col: Photo & Credentials Badge */}
@@ -185,7 +186,9 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
       </section>
 
       {/* Speaking & Advisory Contact Section */}
-      <section className="container-edit max-w-4xl">
+      <section className="relative isolate overflow-hidden bg-premium-side-gradient py-16 border-t border-rule">
+        <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+        <div className="container-edit relative max-w-4xl">
         <div className="rounded-3xl bg-sand/40 dark:bg-sand/20 border border-rule p-8 sm:p-12 shadow-soft">
           <div className="text-center max-w-xl mx-auto mb-8 space-y-3">
             <span className="eyebrow eyebrow-indigo">Inquire for Events</span>
@@ -281,6 +284,7 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
               <span>{isSubmitting ? 'Transmitting Request...' : 'Send Inquiry to Ambesh’s Team'}</span>
             </button>
           </form>
+        </div>
         </div>
       </section>
 

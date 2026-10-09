@@ -14,8 +14,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onNavigateToQuiz
 }) => {
   return (
-    <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
-      {/* Background glow meshes */}
+    <section className="premium-canvas bg-premium-side-gradient relative isolate overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
+      {/* Background light-mode grid and aurora */}
       <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
 
       <div className="container-edit relative">
