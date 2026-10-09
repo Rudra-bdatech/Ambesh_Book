@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, Sparkles, ShoppingBag, Award, ArrowRight, User, Heart, ShieldCheck } from 'lucide-react';
-import { BOOK_INFO } from '../data/bookData';
+import { useEffect, useState } from 'react';
 import { ThemeToggle } from './ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { BOOK_INFO } from '../data/bookData';
+
+const nav = [
+  { id: 'home', label: 'Overview', sub: 'Book summary' },
+  { id: 'pillars', label: '10 Pillars', sub: 'Curriculum' },
+  { id: 'about', label: 'About', sub: 'Who I am' },
+  { id: 'wall-of-love', label: 'Wall of Love', sub: 'Reviews & Praise' },
+  { id: 'quiz', label: 'AI Scorecard', sub: '60s test' },
+  { id: 'copyright', label: 'Copyright', sub: 'Govt IP registered' },
+] as const;
 
 interface NavbarProps {
   activePage: string;
@@ -10,157 +19,133 @@ interface NavbarProps {
   onOpenSampleModal: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpenSampleModal }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSampleModal }: NavbarProps) {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const navItems = [
-    { id: 'home', label: 'Overview', icon: Sparkles },
-    { id: 'pillars', label: '10 Pillars', icon: BookOpen },
-    { id: 'about', label: 'Author', icon: User },
-    { id: 'wall-of-love', label: 'Wall of Love', icon: Heart },
-    { id: 'quiz', label: 'AI Scorecard', icon: Award },
-    { id: 'copyright', label: 'Copyright', icon: ShieldCheck },
-  ];
 
   const handleNavClick = (id: string) => {
     setActivePage(id);
-    setMobileMenuOpen(false);
+    setOpen(false);
+    window.location.hash = id;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full p-3 md:px-8 md:py-4 pointer-events-none">
-      {/* Mobile backdrop */}
+    <header className="fixed top-0 left-0 right-0 z-50 w-full p-3 md:px-10 md:py-4 pointer-events-none">
       <AnimatePresence>
-        {mobileMenuOpen && (
+        {open && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            onClick={() => setMobileMenuOpen(false)}
-            className="fixed inset-0 -z-10 bg-black/30 dark:bg-black/60 backdrop-blur-[8px] pointer-events-auto cursor-pointer"
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 -z-10 bg-black/20 dark:bg-black/45 backdrop-blur-[8px] pointer-events-auto cursor-pointer"
             aria-hidden="true"
           />
         )}
       </AnimatePresence>
-
-      <div
+      <motion.div
+        layout
         style={{
-          backgroundImage: mobileMenuOpen
+          willChange: "width, max-width, padding",
+          backgroundImage: open
             ? "var(--header-bg-open)"
-            : isScrolled
+            : scrolled
               ? "var(--header-bg-scrolled)"
               : "var(--header-bg-top)",
-          boxShadow: isScrolled ? "var(--header-shadow)" : "var(--header-shadow-top)",
+          boxShadow: scrolled ? "var(--header-shadow)" : "var(--header-shadow-top)",
         }}
-        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-all duration-300 backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${
-          mobileMenuOpen
-            ? "max-w-2xl rounded-[2rem] p-5 border-rule/60 dark:border-white/20"
-            : isScrolled
-              ? "max-w-6xl rounded-full py-2 px-3 min-[400px]:px-4 md:px-6 border-rule/50 dark:border-white/15"
-              : "max-w-7xl rounded-full py-3 px-4 min-[400px]:px-6 md:px-8 border-rule/40 dark:border-white/10"
-        }`}
+        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
+            ? "max-w-2xl rounded-[2.25rem] p-5 border-white/40"
+            : scrolled
+              ? "max-w-4xl rounded-full py-2 px-3 min-[400px]:px-4 md:px-6 border-white/40"
+              : "max-w-[70rem] rounded-full py-3.5 px-4 min-[400px]:px-6 md:px-8 border-white/25"
+          }`}
+        transition={{
+          duration: 0.32,
+          ease: [0.16, 1, 0.3, 1]
+        }}
       >
-        <div className="flex items-center justify-between gap-3">
-          {/* Logo & Brand */}
+        <div className="flex items-center justify-between">
           <button
             onClick={() => handleNavClick('home')}
-            className="group flex items-center gap-2.5 text-left focus:outline-none shrink-0"
+            className="group flex items-center gap-2.5 text-left focus:outline-none"
           >
             <img
               src="/atlogo.jpeg"
               alt="Ambesh Tiwari logo"
-              className={`h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-300 group-hover:scale-105 shadow-sm ${
-                isScrolled ? "scale-90" : "scale-100"
-              }`}
+              className={`h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-500 group-hover:scale-105 ${scrolled ? "scale-85" : "scale-100"
+                }`}
             />
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <span className="font-display text-sm md:text-base font-bold tracking-tight text-ink">
-                  Accelerate with AI
-                </span>
-                <span className="hidden xl:inline-flex items-center gap-1 rounded-full border border-rule px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-accent bg-accent/10">
-                  Bestseller
-                </span>
-              </div>
-              <span className="text-[11px] text-ink-muted hidden sm:inline-block">
-                By Ambesh Tiwari
-              </span>
-            </div>
+            <span className="font-display text-sm font-bold tracking-tight text-ink md:text-base whitespace-nowrap">
+              Ambesh Tiwari
+            </span>
           </button>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => {
-              const isActive = activePage === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => handleNavClick(item.id)}
-                  className={`whitespace-nowrap rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all duration-200 ${
-                    isActive
-                      ? "bg-accent text-accent-foreground shadow-lift"
-                      : "text-ink-soft hover:text-ink hover:bg-accent/10"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              );
-            })}
+          <nav className="hidden items-center gap-0.5 lg:flex">
+            {nav.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`whitespace-nowrap rounded-full border border-transparent px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] font-medium transition-all duration-300 ${
+                  activePage === item.id
+                    ? "bg-accent text-accent-foreground shadow-lift font-semibold"
+                    : "text-ink-soft hover:text-ink hover:bg-accent/10"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
-          {/* Action CTAs */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Excerpt CTA */}
-            <button
-              onClick={onOpenSampleModal}
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-rule bg-canvas/80 px-3.5 py-1.5 text-xs font-semibold text-ink-soft transition-all hover:border-ink/40 hover:text-ink dark:border-white/15 dark:text-[#bbe0fa] dark:hover:border-accent"
-            >
-              <BookOpen className="h-3.5 w-3.5 text-accent" />
-              <span>Read Excerpt</span>
-            </button>
-
-            {/* Amazon CTA Button */}
-            <a
-              href={BOOK_INFO.kindleLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-premium inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-4 text-xs font-semibold transition-all"
-            >
-              <ShoppingBag className="h-3.5 w-3.5" />
-              <span className="hidden min-[480px]:inline">Get on</span> Amazon
-              <ArrowRight className="h-3 w-3" />
-            </a>
-
-            {/* Theme Switcher Toggle */}
+          <div className="flex shrink-0 items-center gap-2">
             <ThemeToggle />
-
-            {/* Mobile Menu Toggle Button */}
-            <button
+            <div className="hidden lg:block">
+              <a
+                href={BOOK_INFO.kindleLink}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-premium group inline-flex h-10 px-5 text-xs items-center gap-2 rounded-full font-semibold transition-all duration-300"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Get on Amazon
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </a>
+            </div>
+            <motion.button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-rule text-ink hover:bg-accent/10 lg:hidden dark:border-white/15"
-              aria-label="Toggle Navigation Menu"
+              onClick={() => {
+                setOpen((v) => !v);
+                if (typeof navigator !== "undefined" && navigator.vibrate) {
+                  navigator.vibrate(6);
+                }
+              }}
+              whileTap={{ scale: 0.85 }}
+              transition={{ type: "spring", stiffness: 500, damping: 25 }}
+              className="rounded-full p-1.5 text-ink transition-colors hover:bg-sand/60 lg:hidden flex items-center justify-center w-8 h-8"
+              aria-label="Toggle menu"
             >
-              <svg width="18" height="18" viewBox="0 0 23 23">
+              <svg width="18" height="18" viewBox="0 0 23 23" className="overflow-visible">
                 <motion.path
                   fill="transparent"
                   strokeWidth="2.5"
                   stroke="currentColor"
                   strokeLinecap="round"
-                  animate={mobileMenuOpen ? { d: "M 3 16.5 L 17 2.5" } : { d: "M 2 2.5 L 20 2.5" }}
-                  transition={{ duration: 0.2 }}
+                  variants={{
+                    closed: { d: "M 2 2.5 L 20 2.5" },
+                    open: { d: "M 3 16.5 L 17 2.5" }
+                  }}
+                  animate={open ? "open" : "closed"}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 />
                 <motion.path
                   d="M 2 9.423 L 20 9.423"
@@ -168,7 +153,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
                   strokeWidth="2.5"
                   stroke="currentColor"
                   strokeLinecap="round"
-                  animate={mobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
+                  variants={{
+                    closed: { opacity: 1 },
+                    open: { opacity: 0 }
+                  }}
+                  animate={open ? "open" : "closed"}
                   transition={{ duration: 0.2 }}
                 />
                 <motion.path
@@ -176,70 +165,129 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
                   strokeWidth="2.5"
                   stroke="currentColor"
                   strokeLinecap="round"
-                  animate={mobileMenuOpen ? { d: "M 3 2.5 L 17 16.346" } : { d: "M 2 16.346 L 20 16.346" }}
-                  transition={{ duration: 0.2 }}
+                  variants={{
+                    closed: { d: "M 2 16.346 L 20 16.346" },
+                    open: { d: "M 3 2.5 L 17 16.346" }
+                  }}
+                  animate={open ? "open" : "closed"}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 />
               </svg>
-            </button>
+            </motion.button>
           </div>
         </div>
 
-        {/* Mobile Menu Dropdown */}
         <AnimatePresence>
-          {mobileMenuOpen && (
+          {open && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="overflow-hidden lg:hidden pt-4 mt-4 border-t border-rule/40 dark:border-white/10"
+              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              className="overflow-hidden lg:hidden max-h-[calc(100dvh-120px)]"
             >
-              <div className="grid grid-cols-2 gap-2 pb-2">
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activePage === item.id;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => handleNavClick(item.id)}
-                      className={`flex items-center gap-2 rounded-xl p-2.5 text-xs font-semibold text-left transition-all ${
-                        isActive
-                          ? "bg-accent text-accent-foreground"
-                          : "text-ink-soft hover:text-ink hover:bg-accent/10"
-                      }`}
-                    >
-                      <Icon className="h-4 w-4 shrink-0" />
-                      <span>{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div className="mt-3 pt-3 border-t border-rule/30 flex flex-col gap-2">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenSampleModal();
+              <div className="pt-6">
+                <motion.nav
+                  initial="closed"
+                  animate={open ? "open" : "closed"}
+                  exit="closed"
+                  variants={{
+                    open: {
+                      transition: { staggerChildren: 0.045, delayChildren: 0.06 }
+                    },
+                    closed: {
+                      transition: { staggerChildren: 0.02, staggerDirection: -1 }
+                    }
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-rule text-xs font-semibold text-ink hover:bg-accent/10"
+                  className="grid grid-cols-2 gap-3 py-1.5 [perspective:800px]"
                 >
-                  <BookOpen className="h-4 w-4 text-accent" />
-                  Read Free Chapter
-                </button>
-                <a
-                  href={BOOK_INFO.kindleLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-premium w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold"
-                >
-                  <ShoppingBag className="h-4 w-4" />
-                  Order on Amazon
-                </a>
+                  {nav.map((item, index) => (
+                    <motion.div
+                      key={item.id}
+                      variants={{
+                        open: {
+                          y: 0,
+                          opacity: 1,
+                          rotateX: 0,
+                          scale: 1,
+                          transition: { type: "spring", stiffness: 350, damping: 25, mass: 0.9 }
+                        },
+                        closed: {
+                          y: -20,
+                          opacity: 0,
+                          rotateX: -15,
+                          scale: 0.95,
+                          transition: { duration: 0.15, ease: "easeIn" }
+                        }
+                      }}
+                      className="origin-top"
+                      whileTap={{ scale: 0.95 }}
+                      onAnimationStart={(definition) => {
+                        if (definition === "open" && typeof navigator !== "undefined" && navigator.vibrate) {
+                          const duration = Math.max(3, 18 - index * 2.5);
+                          navigator.vibrate(duration);
+                        }
+                      }}
+                    >
+                      <button
+                        onClick={() => handleNavClick(item.id)}
+                        className={`rounded-3xl border p-3.5 flex flex-col items-start justify-center gap-0.5 transition-colors text-left w-full ${
+                          activePage === item.id
+                            ? "bg-accent text-accent-foreground border-accent shadow-lift font-semibold"
+                            : "text-ink bg-black/[0.024] dark:bg-white/[0.03] border-rule/70 dark:border-white/[0.06] hover:bg-black/[0.05] dark:hover:bg-white/[0.08]"
+                        }`}
+                      >
+                        <span className="text-[14px] font-bold tracking-tight">
+                          {item.label}
+                        </span>
+                        <span className="text-[11px] opacity-60 font-normal">
+                          {item.sub}
+                        </span>
+                      </button>
+                    </motion.div>
+                  ))}
+                  <motion.div
+                    variants={{
+                      open: {
+                        y: 0,
+                        opacity: 1,
+                        rotateX: 0,
+                        scale: 1,
+                        transition: { type: "spring", stiffness: 350, damping: 25, mass: 0.9 }
+                      },
+                      closed: {
+                        y: -20,
+                        opacity: 0,
+                        rotateX: -15,
+                        scale: 0.95,
+                        transition: { duration: 0.15, ease: "easeIn" }
+                      }
+                    }}
+                    className="col-span-2 mt-2 flex justify-center origin-top"
+                    whileTap={{ scale: 0.97 }}
+                    onAnimationStart={(definition) => {
+                      if (definition === "open" && typeof navigator !== "undefined" && navigator.vibrate) {
+                        navigator.vibrate(3);
+                      }
+                    }}
+                  >
+                    <a
+                      href={BOOK_INFO.kindleLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      onClick={() => setOpen(false)}
+                      className="btn-premium w-full justify-center py-3 rounded-full text-sm font-semibold flex items-center gap-2"
+                    >
+                      Get on Amazon
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </motion.div>
+                </motion.nav>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
     </header>
   );
-};
+}
