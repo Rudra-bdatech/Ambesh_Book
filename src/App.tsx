@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -16,6 +16,7 @@ export function App() {
   const [activePage, setActivePage] = useState<string>('home');
   const [isSampleModalOpen, setIsSampleModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   // Initialize Lenis smooth scroll for desktop version
   useEffect(() => {
@@ -28,13 +29,17 @@ export function App() {
     if (isMobileDevice) return;
 
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: 0.85,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.15,
+      wheelMultiplier: 1.1,
+      touchMultiplier: 1.2,
+      syncTouch: false,
     });
+
+    lenisRef.current = lenis;
 
     let rafId: number;
     function raf(time: number) {
@@ -47,6 +52,7 @@ export function App() {
     return () => {
       cancelAnimationFrame(rafId);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
@@ -66,7 +72,10 @@ export function App() {
   const handlePageChange = (page: string) => {
     setActivePage(page);
     window.location.hash = page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
   const showToast = (msg: string) => {

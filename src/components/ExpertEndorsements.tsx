@@ -87,6 +87,8 @@ export const ExpertEndorsements: React.FC = () => {
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 rounded-2xl object-cover border border-rule shadow-sm group-hover:border-accent transition-colors"
                   />
                   {testimonial.verifiedBuyer && (

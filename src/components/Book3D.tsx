@@ -99,6 +99,7 @@ export function Book3D({ progress = 0, isMobile = false }: Book3DProps) {
                 alt="Accelerate with AI - book cover by Ambesh Tiwari"
                 className="h-full w-full object-fill"
                 loading="eager"
+                decoding="async"
               />
             </div>
 

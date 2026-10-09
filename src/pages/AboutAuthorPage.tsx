@@ -63,6 +63,8 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast, o
                   <img
                     src="/assets/Ambesh-Tiwari.jpg"
                     alt="Ambesh Tiwari"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-[400px] object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="p-4 bg-canvas/90 dark:bg-canvas/80 backdrop-blur-md rounded-xl mt-3 border border-rule space-y-1 shadow-sm">

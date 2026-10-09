@@ -154,6 +154,8 @@ export const WallOfLovePage: React.FC<WallOfLovePageProps> = ({ onShowToast, onO
                   <img
                     src={item.avatar}
                     alt={item.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-12 h-12 rounded-2xl object-cover border border-rule shadow-sm group-hover:border-accent transition-colors"
                   />
                   <div className="min-w-0">

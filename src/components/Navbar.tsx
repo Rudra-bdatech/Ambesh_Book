@@ -32,9 +32,18 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    setScrolled(window.scrollY > 40);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -42,7 +51,6 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
     setActivePage(id);
     setOpen(false);
     window.location.hash = id;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -63,7 +71,6 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
       <motion.div
         layout
         style={{
-          willChange: "transform, width, max-width",
           transform: "translateZ(0)",
           backgroundImage: open
             ? "var(--header-bg-open)"
@@ -72,7 +79,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               : "var(--header-bg-top)",
           boxShadow: scrolled ? "var(--header-shadow)" : "var(--header-shadow-top)",
         }}
-        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
+        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[20px] [-webkit-backdrop-filter:blur(20px)_saturate(180%)_brightness(1.05)] [backdrop-filter:blur(20px)_saturate(180%)_brightness(1.05)] ${open
             ? "max-w-2xl rounded-[2.25rem] p-5 border-white/40"
             : scrolled
               ? "max-w-5xl rounded-full py-2 px-3.5 min-[400px]:px-4 md:px-6 border-white/40"

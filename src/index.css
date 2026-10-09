@@ -312,13 +312,6 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* fixed attachment only on true desktop (pointer + large screen) — avoids scroll lag on mobile */
-  @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
-    body {
-      background-attachment: fixed;
-    }
-  }
-
   h1,
   h2,
   h3,
@@ -447,8 +440,6 @@
     border-radius: 9999px;
     padding: 0.3rem 0.85rem;
     background-color: oklch(0.35 0.17 250 / 0.06) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     width: fit-content;
   }
 
@@ -1018,12 +1009,18 @@
      The light grey fill separates grid sections from the plain canvas sections. */
   .home-grid-light {
     background-color: oklch(0.975 0.005 250);
+    contain: paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .home-grid-light::after {
     content: "";
     position: absolute;
     inset: 0;
+    contain: paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     background-image:
       linear-gradient(to right, oklch(0.18 0.04 260 / 0.06) 1px, transparent 1px),
       linear-gradient(to bottom, oklch(0.18 0.04 260 / 0.06) 1px, transparent 1px);
