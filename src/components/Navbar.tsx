@@ -19,6 +19,14 @@ interface NavbarProps {
   onOpenSampleModal: () => void;
 }
 
+function AmazonIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 448 512" fill="currentColor" className={className} aria-label="Amazon" xmlns="http://www.w3.org/2000/svg">
+      <path d="M257.2 162.7c-48.7 0-75.9 18.9-92.7 44.2-3.6 5.3-2.4 12.3 2.7 16.3l27.1 20.7c5.1 3.9 12.4 3.1 16.5-1.9 11.4-13.8 24.3-23.7 47.7-23.7 24.3 0 41.7 13.8 41.7 34.2v6.3c-15.6-3-34.8-4.8-56.7-4.8-62.7 0-100.2 29.4-100.2 74.4 0 43.5 33.3 69.3 75.9 69.3 34.2 0 57.6-13.8 71.7-32.1h2.1v24.6c0 6.6 5.4 12 12 12h34.8c6.6 0 12-5.4 12-12V245.4c0-54.6-40.8-82.7-94.9-82.7zm16.5 137.4c0 36.3-24.9 52.8-48.9 52.8-21.3 0-36.9-12.9-36.9-34.2 0-27.6 22.8-39.6 57.6-39.6 9.6 0 19.2 1.2 28.2 3.3v17.7zm158.4 100.5C401.3 432.2 329.8 464 246.3 464c-87.3 0-165.6-34.8-222-92.4-4.8-4.8-1.5-13.2 5.1-10.2 66.9 30.6 142.2 48.6 221.7 48.6 70.8 0 137.4-14.7 186.9-42.3 7.2-4.2 14.1 3.9 8.7 9.6l-14.6 13.3zm21.3-33.3c-5.7-7.2-27.9-3.3-41.1-1.8-3.9.6-5.4-3.6-2.4-6 20.7-16.2 53.4-11.4 58.5-4.8 5.1 6.9-2.1 39-21.3 56.4-3.3 3-7.5.9-5.7-2.7 6.6-12.9 17.7-33.9 12-41.1z"/>
+    </svg>
+  );
+}
+
 export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSampleModal }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -63,10 +71,10 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               : "var(--header-bg-top)",
           boxShadow: scrolled ? "var(--header-shadow)" : "var(--header-shadow-top)",
         }}
-        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
+        className={`relative z-10 mx-auto w-full pointer-events-auto border transition-[border-color,max-width,padding] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] backdrop-blur-[28px] [-webkit-backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] [backdrop-filter:blur(28px)_saturate(200%)_brightness(1.08)] ${open
             ? "max-w-2xl rounded-[2.25rem] p-5 border-white/40"
             : scrolled
-              ? "max-w-4xl rounded-full py-2 px-3 min-[400px]:px-4 md:px-6 border-white/40"
+              ? "max-w-5xl rounded-full py-2 px-3.5 min-[400px]:px-4 md:px-6 border-white/40"
               : "max-w-[70rem] rounded-full py-3.5 px-4 min-[400px]:px-6 md:px-8 border-white/25"
           }`}
         transition={{
@@ -74,10 +82,10 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
           ease: [0.16, 1, 0.3, 1]
         }}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <button
             onClick={() => handleNavClick('home')}
-            className="group flex items-center gap-2.5 text-left focus:outline-none"
+            className="group flex items-center gap-2.5 text-left focus:outline-none shrink-0"
           >
             <img
               src="/atlogo.jpeg"
@@ -95,7 +103,11 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`whitespace-nowrap rounded-full border border-transparent px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] font-medium transition-all duration-300 ${
+                className={`whitespace-nowrap rounded-full border border-transparent transition-all duration-300 ${
+                  scrolled
+                    ? "px-2.5 py-1.5 text-xs font-medium"
+                    : "px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] font-medium"
+                } ${
                   activePage === item.id
                     ? "bg-accent text-accent-foreground shadow-lift font-semibold"
                     : "text-ink-soft hover:text-ink hover:bg-accent/10"
@@ -113,11 +125,22 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                 href={BOOK_INFO.kindleLink}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-premium group inline-flex h-10 px-5 text-xs items-center gap-2 rounded-full font-semibold transition-all duration-300"
+                aria-label="Get on Amazon"
+                title="Get on Amazon"
+                className={`btn-premium group inline-flex items-center justify-center rounded-full font-semibold transition-all duration-300 ${
+                  scrolled
+                    ? "h-9 w-9 p-0 shadow-sm"
+                    : "h-10 px-5 text-xs gap-2 shadow-md"
+                }`}
               >
-                <span className="relative z-10 flex items-center gap-2">
-                  Get on Amazon
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <span className="relative z-10 flex items-center justify-center gap-1.5">
+                  <AmazonIcon className={`${scrolled ? "h-4 w-4" : "h-3.5 w-3.5"} shrink-0 transition-transform duration-300 group-hover:scale-110`} />
+                  {!scrolled && (
+                    <>
+                      <span>Get on Amazon</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
                 </span>
               </a>
             </div>
@@ -278,6 +301,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                       onClick={() => setOpen(false)}
                       className="btn-premium w-full justify-center py-3 rounded-full text-sm font-semibold flex items-center gap-2"
                     >
+                      <AmazonIcon className="h-4 w-4 shrink-0" />
                       Get on Amazon
                       <ArrowRight className="h-4 w-4" />
                     </a>
