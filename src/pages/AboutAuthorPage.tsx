@@ -5,8 +5,7 @@ import {
   Briefcase,
   CheckCircle2,
   Globe,
-  Send,
-  Calendar
+  Send
 } from 'lucide-react';
 import { LinkedInIcon, TwitterIcon } from '../components/SocialIcons';
 import { AUTHOR_BIO } from '../data/bookData';
@@ -43,36 +42,34 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
   };
 
   return (
-    <div className="pt-32 pb-24 space-y-24">
+    <div className="pt-32 pb-24 space-y-20 bg-canvas text-ink transition-colors">
       
       {/* Hero / Overview Header */}
       <section className="relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-edit">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left Col: Photo & Credentials Badge */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative max-w-sm w-full">
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 via-indigo-500/20 to-purple-500/20 rounded-3xl blur-2xl -z-10" />
-                
-                <div className="rounded-3xl bg-slate-900 border border-slate-800 p-3 shadow-2xl overflow-hidden group">
+                <div className="rounded-3xl bg-sand/40 dark:bg-sand/20 border border-rule p-3 shadow-soft overflow-hidden group">
                   <img
                     src="/assets/Ambesh-Tiwari.jpg"
                     alt="Ambesh Tiwari"
-                    className="w-full h-[420px] object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-[400px] object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="p-4 bg-slate-950/90 rounded-xl mt-3 border border-slate-800 space-y-1">
-                    <h3 className="text-white font-bold text-base">{AUTHOR_BIO.name}</h3>
-                    <p className="text-xs text-cyan-400 font-medium">Founder, StartupAccel & AI Strategist</p>
+                  <div className="p-4 bg-canvas rounded-xl mt-3 border border-rule space-y-1 shadow-sm">
+                    <h3 className="text-ink font-bold text-base">{AUTHOR_BIO.name}</h3>
+                    <p className="text-xs text-accent font-semibold">Founder, BDA Technologies & AI Trainer</p>
                   </div>
                 </div>
 
                 {/* Floating Experience Badge */}
-                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-cyan-500 to-indigo-600 text-slate-950 p-4 rounded-2xl shadow-xl font-bold text-xs flex items-center gap-2.5">
-                  <Award className="w-5 h-5 text-slate-950" />
+                <div className="absolute -bottom-4 -right-4 bg-accent text-white p-4 rounded-2xl shadow-lift font-bold text-xs flex items-center gap-2.5">
+                  <Award className="w-5 h-5 text-white" />
                   <div>
                     <p className="font-black text-sm leading-tight">10+ Years</p>
-                    <p className="text-[10px] uppercase tracking-wider font-semibold">Growth Consulting</p>
+                    <p className="text-[10px] uppercase font-mono tracking-wider">Growth Consulting</p>
                   </div>
                 </div>
               </div>
@@ -80,21 +77,22 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
 
             {/* Right Col: Executive Bio */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
-                <User className="w-3.5 h-3.5" />
-                Author & Growth Strategist
+              <div className="inline-flex items-center gap-2">
+                <span className="eyebrow eyebrow-indigo">
+                  <User className="w-3.5 h-3.5" /> Author & AI Trainer
+                </span>
               </div>
 
-              <h1 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight">
-                Empowering Business Leaders to <span className="text-gradient-cyan">Accelerate with AI</span>
+              <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-ink tracking-tight leading-tight">
+                Empowering Business Leaders to <span className="text-gradient-brand">Accelerate with AI</span>
               </h1>
 
-              <div className="space-y-4 text-slate-300 text-sm sm:text-base leading-relaxed">
+              <div className="space-y-4 text-ink-soft text-sm sm:text-base leading-relaxed">
                 <p>
-                  Ambesh Tiwari is deeply passionate about AI and its transformative potential, especially in GenAI applications. With over a decade dedicated to growth consulting, he has been at the forefront of innovation and transformation, guiding and collaborating with businesses across various sectors.
+                  Ambesh Tiwari is one of India's leading AI trainers, business consultants, and author of <em>Accelerate with AI</em>. He has trained 5,000+ professionals across 50+ organisations in 11 industries and is founder of BDA Technologies.
                 </p>
                 <p>
-                  He blends engineering know-how with keen marketing insights. Rather than resting on his achievements, Ambesh continually seeks ways to make AI tools accessible and beneficial for businesses of all sizes. His commitment has been instrumental in helping many organizations enhance their productivity, but for Ambesh, the journey of learning and sharing never stops.
+                  He blends engineering know-how with keen operational systems. Rather than resting on high-level theory, Ambesh continually creates battle-tested workflows, SOPs, and agentic frameworks that make AI tools accessible and profitable for businesses of all sizes.
                 </p>
               </div>
 
@@ -104,27 +102,27 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
                   href={AUTHOR_BIO.socials.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center gap-2 transition-colors"
+                  className="px-4 py-2 rounded-full bg-sand/60 dark:bg-sand/30 border border-rule hover:border-accent text-ink-soft hover:text-accent text-xs font-semibold flex items-center gap-2 transition-colors"
                 >
-                  <LinkedInIcon className="w-4 h-4 text-cyan-400" />
+                  <LinkedInIcon className="w-4 h-4 text-accent" />
                   <span>LinkedIn Profile</span>
                 </a>
                 <a
                   href={AUTHOR_BIO.socials.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center gap-2 transition-colors"
+                  className="px-4 py-2 rounded-full bg-sand/60 dark:bg-sand/30 border border-rule hover:border-accent text-ink-soft hover:text-accent text-xs font-semibold flex items-center gap-2 transition-colors"
                 >
-                  <TwitterIcon className="w-4 h-4 text-cyan-400" />
+                  <TwitterIcon className="w-4 h-4 text-accent" />
                   <span>Twitter / X</span>
                 </a>
                 <a
                   href={AUTHOR_BIO.socials.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 text-slate-300 hover:text-cyan-400 text-xs font-semibold flex items-center gap-2 transition-colors"
+                  className="px-4 py-2 rounded-full bg-sand/60 dark:bg-sand/30 border border-rule hover:border-accent text-ink-soft hover:text-accent text-xs font-semibold flex items-center gap-2 transition-colors"
                 >
-                  <Globe className="w-4 h-4 text-cyan-400" />
+                  <Globe className="w-4 h-4 text-accent" />
                   <span>Official Website</span>
                 </a>
               </div>
@@ -135,41 +133,50 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
         </div>
       </section>
 
-      {/* StartupAccel Mission Section */}
-      <section className="py-16 bg-slate-950/60 border-y border-slate-900 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* StartupAccel / BDA Ecosystem Section */}
+      <section className="py-16 bg-sand/30 dark:bg-sand/15 border-y border-rule relative">
+        <div className="container-edit">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold uppercase tracking-wider">
-                <Briefcase className="w-3.5 h-3.5" />
-                Venture & Consulting
+              <div className="inline-flex items-center gap-2">
+                <span className="eyebrow eyebrow-indigo">
+                  <Briefcase className="w-3.5 h-3.5" /> Venture & Consulting
+                </span>
               </div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
-                About StartupAccel
+              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-ink">
+                About StartupAccel & BDA Technologies
               </h2>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-                StartupAccel exists to propel service businesses into modern, scalable success stories. Offering a range of consulting and digital transformation services, StartupAccel specializes in using AI-driven strategies to optimize traditional processes.
+              <p className="text-ink-soft text-sm sm:text-base leading-relaxed">
+                Founded by Ambesh Tiwari, StartupAccel and BDA Technologies serve as innovation advisory firms that empower entrepreneurs, mid-market enterprises, and corporate leaders to unlock scalable growth through AI-native systems, workflow automation, and fractional AI officer advisory.
               </p>
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
-                  <p className="text-white font-bold text-xs">AI Operational Modernization</p>
-                  <p className="text-slate-400 text-[11px]">Upgrading legacy service models with autonomous agent workflows.</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
-                  <p className="text-white font-bold text-xs">Executive Advisory & Coaching</p>
-                  <p className="text-slate-400 text-[11px]">Mentoring founders on turning data silos into competitive moats.</p>
-                </div>
+                {[
+                  'Enterprise GenAI Strategy & Audits',
+                  'Agentic Workflow Automation',
+                  'Custom RAG & Knowledge Bases',
+                  'Executive Leadership Masterclasses'
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-2 text-xs text-ink font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="rounded-3xl bg-slate-900/80 border border-cyan-500/30 p-4 shadow-2xl">
-                <img
-                  src="/assets/Ambesh-Tiwari-Accelereate-with-AI.jpg"
-                  alt="Ambesh Tiwari presenting Accelerate with AI"
-                  className="w-full h-[280px] object-cover rounded-2xl"
-                />
+            <div className="lg:col-span-5">
+              <div className="p-6 sm:p-8 rounded-3xl bg-canvas border border-rule shadow-soft space-y-4">
+                <h4 className="font-display font-bold text-ink text-base">Key Leadership Stats</h4>
+                <div className="space-y-3">
+                  {AUTHOR_BIO.stats.map((stat, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 rounded-2xl bg-sand/40 dark:bg-sand/20 border border-rule">
+                      <span className="text-xs text-ink-muted">{stat.label}</span>
+                      <span className="font-display font-bold text-accent text-sm">{stat.value}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -177,131 +184,103 @@ export const AboutAuthorPage: React.FC<AboutAuthorPageProps> = ({ onShowToast })
         </div>
       </section>
 
-      {/* Speaking Topics & Keynote Booking Form */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          
-          {/* Topics */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs font-bold uppercase tracking-wider">
-                <Calendar className="w-3.5 h-3.5" />
-                Keynote & Masterclasses
+      {/* Speaking & Advisory Contact Section */}
+      <section className="container-edit max-w-4xl">
+        <div className="rounded-3xl bg-sand/40 dark:bg-sand/20 border border-rule p-8 sm:p-12 shadow-soft">
+          <div className="text-center max-w-xl mx-auto mb-8 space-y-3">
+            <span className="eyebrow eyebrow-indigo">Inquire for Events</span>
+            <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-ink">
+              Invite Ambesh to Speak or Advise Your Board
+            </h3>
+            <p className="text-ink-soft text-xs sm:text-sm">
+              Deliver transformative AI keynotes, private executive briefings, or hands-on corporate bootcamps.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-ink-muted uppercase tracking-wider mb-1.5">
+                  Your Full Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="e.g. Sarah Jenkins"
+                  className="w-full rounded-2xl border border-rule bg-canvas px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  required
+                />
               </div>
-              <h3 className="text-2xl font-black text-white font-display">
-                Invite Ambesh to Speak
-              </h3>
-              <p className="text-slate-400 text-xs sm:text-sm">
-                Deliver high-energy, actionable keynotes and executive strategy roundtables for your organization.
-              </p>
+              <div>
+                <label className="block text-xs font-bold text-ink-muted uppercase tracking-wider mb-1.5">
+                  Work Email
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="sarah@company.com"
+                  className="w-full rounded-2xl border border-rule bg-canvas px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  required
+                />
+              </div>
             </div>
 
-            <div className="space-y-3">
-              {[
-                { title: 'The Generative AI Business Playbook', desc: 'Demystifying LLMs and agentic workflows for non-tech executives.' },
-                { title: '10x Leverage: Scaling Service Firms with AI', desc: 'How to expand margins and deliver 3x output without ballooning headcount.' },
-                { title: 'Building Responsible AI Governance', desc: 'Safeguarding enterprise IP, compliance, and hallucination controls.' }
-              ].map((topic, i) => (
-                <div key={i} className="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-white font-bold text-xs">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>{topic.title}</span>
-                  </div>
-                  <p className="text-slate-400 text-[11px] pl-5">{topic.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Booking Inquiry Form */}
-          <div className="lg:col-span-7">
-            <div className="rounded-3xl bg-slate-900/90 border border-cyan-500/30 p-6 sm:p-8 shadow-2xl backdrop-blur-xl space-y-4">
-              <h4 className="text-lg font-bold text-white">
-                Submit Keynote or Advisory Inquiry
-              </h4>
-              <p className="text-xs text-slate-400">
-                Directly connect with Ambesh Tiwari’s engagement team for summits, consulting, or bulk book orders.
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-3.5 pt-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Rahul Mehta"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Work Email</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="rahul@company.com"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Company / Organization</label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.organization}
-                      onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                      placeholder="e.g. TechCorp Asia"
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-300 mb-1">Engagement Type</label>
-                    <select
-                      value={formData.topic}
-                      onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-                      className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-cyan-500"
-                    >
-                      <option>Keynote Speech</option>
-                      <option>Executive AI Masterclass</option>
-                      <option>StartupAccel Advisory</option>
-                      <option>Bulk Book Orders</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Message / Event Details</label>
-                  <textarea
-                    rows={3}
-                    required
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Tell us about your event dates, expected audience size, or consulting objectives..."
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:border-cyan-500"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition-all flex items-center justify-center gap-2"
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-ink-muted uppercase tracking-wider mb-1.5">
+                  Company / Organization
+                </label>
+                <input
+                  type="text"
+                  value={formData.organization}
+                  onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                  placeholder="e.g. Acme Enterprises"
+                  className="w-full rounded-2xl border border-rule bg-canvas px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-ink-muted uppercase tracking-wider mb-1.5">
+                  Inquiry Topic
+                </label>
+                <select
+                  value={formData.topic}
+                  onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
+                  className="w-full rounded-2xl border border-rule bg-canvas px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? 'Submitting...' : 'Send Inquiry to Engagement Team'}</span>
-                </button>
-              </form>
+                  <option value="Keynote Speech">Keynote Speech / Conference</option>
+                  <option value="Corporate Workshop">Executive AI Workshop</option>
+                  <option value="Board Advisory">Fractional AI / Board Advisory</option>
+                  <option value="Bulk Book Orders">Bulk Book Purchases for Teams</option>
+                </select>
+              </div>
             </div>
-          </div>
 
+            <div>
+              <label className="block text-xs font-bold text-ink-muted uppercase tracking-wider mb-1.5">
+                Message / Event Details
+              </label>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows={4}
+                placeholder="Share dates, attendee count, or primary goals..."
+                className="w-full rounded-2xl border border-rule bg-canvas px-4 py-3 text-xs text-ink focus:outline-none focus:border-accent resize-none"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-premium w-full py-3.5 rounded-full text-xs font-semibold flex items-center justify-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              <span>{isSubmitting ? 'Transmitting Request...' : 'Send Inquiry to Ambesh’s Team'}</span>
+            </button>
+          </form>
         </div>
       </section>
 

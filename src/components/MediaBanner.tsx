@@ -3,23 +3,23 @@ import { MEDIA_FEATURES } from '../data/bookData';
 
 export const MediaBanner: React.FC = () => {
   return (
-    <section className="py-12 border-y border-slate-800/80 bg-slate-950/60 backdrop-blur-md relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center text-xs sm:text-sm uppercase tracking-widest font-bold text-slate-400 mb-8">
-          Author & Book Featured On Global Media & Industry Platforms
+    <section className="relative bg-canvas py-8 border-y border-rule transition-colors">
+      <div className="container-edit">
+        <p className="text-center font-mono text-[11px] uppercase tracking-widest font-semibold text-ink-muted mb-6">
+          Featured on Global Media & Business Publications
         </p>
 
-        {/* Media logos grid with hover glow */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center justify-items-center">
+        {/* Media logos grid with smooth hover effect */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-6 items-center justify-items-center">
           {MEDIA_FEATURES.map((media, index) => (
             <div
               key={index}
-              className="w-full flex items-center justify-center p-3 rounded-xl bg-slate-900/40 hover:bg-slate-900/80 border border-slate-800/60 hover:border-cyan-500/40 transition-all duration-300 group shadow-sm"
+              className="w-full flex items-center justify-center p-3 sm:p-4 rounded-2xl bg-sand/50 dark:bg-sand/20 border border-rule transition-all duration-300 hover:border-accent/40 group"
             >
               <img
                 src={media.logoUrl}
                 alt={media.name}
-                className="max-h-12 w-auto object-contain filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
+                className="max-h-8 sm:max-h-10 w-auto object-contain filter grayscale contrast-125 dark:invert dark:opacity-75 opacity-70 group-hover:filter-none group-hover:opacity-100 transition-all duration-300"
               />
             </div>
           ))}

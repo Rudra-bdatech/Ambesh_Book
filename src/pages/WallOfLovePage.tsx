@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Heart, Star, Quote, CheckCircle2, MessageSquarePlus, Send } from 'lucide-react';
+import { Heart, Star, Quote, CheckCircle2, MessageSquarePlus, Send, X } from 'lucide-react';
 import { TESTIMONIALS } from '../data/bookData';
 
 interface WallOfLovePageProps {
@@ -29,45 +29,46 @@ export const WallOfLovePage: React.FC<WallOfLovePageProps> = ({ onShowToast }) =
   };
 
   return (
-    <div className="pt-32 pb-24 space-y-16">
+    <div className="pt-32 pb-24 space-y-16 bg-canvas text-ink transition-colors">
       
       {/* Header */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-300 text-xs font-bold uppercase tracking-wider">
-          <Heart className="w-3.5 h-3.5 text-pink-400 fill-pink-400" />
-          Wall of Love & Reader Impact
+      <section className="container-edit max-w-5xl text-center space-y-4">
+        <div className="inline-flex items-center gap-2">
+          <span className="eyebrow eyebrow-indigo">
+            <Heart className="w-3.5 h-3.5 text-accent" /> Wall of Love & Reader Impact
+          </span>
         </div>
 
-        <h1 className="font-display font-black text-3xl sm:text-5xl text-white tracking-tight">
-          Praise for <span className="text-gradient-cyan">Accelerate with AI</span>
+        <h1 className="font-display font-extrabold text-3xl sm:text-5xl text-ink tracking-tight">
+          Praise for <span className="text-gradient-brand">Accelerate with AI</span>
         </h1>
 
-        <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+        <p className="text-ink-soft text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
           See how researchers, corporate leaders, and entrepreneurs are using Ambesh Tiwari’s frameworks to transform their businesses.
         </p>
 
         {/* Global Rating Card */}
-        <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-300">
-          <div className="flex items-center gap-2 bg-slate-900 border border-slate-800 px-4 py-2 rounded-2xl">
-            <div className="flex text-amber-400">
+        <div className="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs text-ink-soft">
+          <div className="flex items-center gap-2 bg-sand/60 dark:bg-sand/30 border border-rule px-4 py-2 rounded-full shadow-sm">
+            <div className="flex text-amber-500">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-400" />
+                <Star key={i} className="w-3.5 h-3.5 fill-amber-500" />
               ))}
             </div>
-            <span className="font-black text-white text-sm">4.9 / 5.0 Rating</span>
+            <span className="font-bold text-ink text-sm">4.9 / 5.0 Rating</span>
           </div>
 
-          <div className="bg-slate-900 border border-slate-800 px-4 py-2 rounded-2xl flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+          <div className="bg-sand/60 dark:bg-sand/30 border border-rule px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
             <span>100% Amazon Verified Readers</span>
           </div>
 
           <button
             onClick={() => setShowReviewModal(true)}
-            className="px-4 py-2 rounded-2xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 font-bold text-xs flex items-center gap-1.5 transition-colors"
+            className="px-4 py-2 rounded-full bg-accent text-white font-semibold text-xs flex items-center gap-1.5 shadow-lift hover:opacity-90 transition-all"
           >
-            <MessageSquarePlus className="w-4 h-4" />
-            <span>Submit Your Story</span>
+            <MessageSquarePlus className="w-3.5 h-3.5" />
+            <span>Submit Your Review</span>
           </button>
         </div>
 
@@ -85,8 +86,8 @@ export const WallOfLovePage: React.FC<WallOfLovePageProps> = ({ onShowToast }) =
               onClick={() => setSelectedCategory(cat.id)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
                 selectedCategory === cat.id
-                  ? 'bg-pink-600 text-white font-bold shadow-lg shadow-pink-600/30 scale-105'
-                  : 'bg-slate-900 text-slate-400 border border-slate-800 hover:text-white'
+                  ? 'bg-accent text-white font-bold shadow-soft'
+                  : 'bg-sand/60 dark:bg-sand/30 text-ink-muted border border-rule hover:text-ink hover:border-accent/40'
               }`}
             >
               {cat.label}
@@ -96,48 +97,48 @@ export const WallOfLovePage: React.FC<WallOfLovePageProps> = ({ onShowToast }) =
       </section>
 
       {/* Testimonials Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="container-edit">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filtered.map((item) => (
             <div
               key={item.id}
-              className="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950 p-6 sm:p-8 border border-slate-800 hover:border-pink-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group"
+              className="relative rounded-3xl bg-sand/40 dark:bg-sand/20 p-6 sm:p-8 border border-rule hover:border-accent/50 transition-all duration-300 shadow-soft hover:shadow-lift flex flex-col justify-between group"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex text-amber-400">
+                  <div className="flex text-amber-500">
                     {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      <Star key={i} className="w-3.5 h-3.5 fill-amber-500" />
                     ))}
                   </div>
-                  <Quote className="w-6 h-6 text-slate-700 group-hover:text-pink-500/50 transition-colors" />
+                  <Quote className="w-6 h-6 text-ink-muted/40 group-hover:text-accent transition-colors" />
                 </div>
 
                 {item.highlight && (
-                  <p className="text-xs font-bold text-pink-300 bg-pink-950/40 border border-pink-500/20 px-3 py-1.5 rounded-xl">
+                  <p className="text-xs font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1.5 rounded-xl">
                     "{item.highlight}"
                   </p>
                 )}
 
-                <p className="text-slate-300 text-sm leading-relaxed italic">
+                <p className="text-ink-soft text-sm leading-relaxed font-serif italic">
                   "{item.quote}"
                 </p>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-slate-800/80 flex items-center gap-3.5">
+              <div className="pt-6 mt-6 border-t border-rule flex items-center gap-3.5">
                 <img
                   src={item.avatar}
                   alt={item.name}
-                  className="w-12 h-12 rounded-2xl object-cover border border-pink-500/30 shadow-md"
+                  className="w-12 h-12 rounded-2xl object-cover border border-rule shadow-sm group-hover:border-accent transition-colors"
                 />
                 <div className="min-w-0">
-                  <h4 className="font-bold text-white text-sm truncate">
+                  <h4 className="font-bold text-ink text-sm truncate">
                     {item.name}
                   </h4>
-                  <p className="text-xs text-slate-400 truncate">
+                  <p className="text-xs text-ink-soft truncate">
                     {item.title}
                   </p>
-                  <p className="text-[11px] text-pink-400 font-medium truncate">
+                  <p className="text-[11px] text-accent font-semibold truncate">
                     {item.organization}
                   </p>
                 </div>
@@ -149,77 +150,93 @@ export const WallOfLovePage: React.FC<WallOfLovePageProps> = ({ onShowToast }) =
 
       {/* Review Submission Modal */}
       {showReviewModal && (
-        <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="w-full max-w-lg rounded-3xl bg-slate-900 border border-pink-500/40 p-6 sm:p-8 shadow-2xl space-y-4 animate-fadeIn">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Heart className="w-5 h-5 text-pink-400 fill-pink-400" />
-                Share Your Book Review
-              </h3>
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-fadeIn">
+          <div className="relative w-full max-w-lg rounded-3xl bg-canvas border border-rule shadow-lift p-6 sm:p-8 space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-rule">
+              <div>
+                <h3 className="font-display font-extrabold text-lg text-ink">Submit Your Reader Review</h3>
+                <p className="text-xs text-ink-muted">Share how the book impacted your career or business.</p>
+              </div>
               <button
                 onClick={() => setShowReviewModal(false)}
-                className="text-slate-400 hover:text-white"
+                className="p-1.5 rounded-full hover:bg-sand text-ink-muted hover:text-ink transition-colors"
               >
-                ✕
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmitReview} className="space-y-3">
+            <form onSubmit={handleSubmitReview} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
+                <label className="block text-xs font-bold text-ink-muted uppercase mb-1">Your Full Name</label>
                 <input
                   type="text"
-                  required
                   value={reviewForm.name}
                   onChange={(e) => setReviewForm({ ...reviewForm, name: e.target.value })}
-                  placeholder="e.g. Dr. Ananya Sen"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-pink-500"
+                  placeholder="e.g. David Miller"
+                  className="w-full rounded-2xl border border-rule bg-sand/40 px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent"
+                  required
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Role / Designation</label>
+                  <label className="block text-xs font-bold text-ink-muted uppercase mb-1">Your Role / Title</label>
                   <input
                     type="text"
-                    required
                     value={reviewForm.role}
                     onChange={(e) => setReviewForm({ ...reviewForm, role: e.target.value })}
-                    placeholder="e.g. VP of Product"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-pink-500"
+                    placeholder="e.g. VP of Operations"
+                    className="w-full rounded-2xl border border-rule bg-sand/40 px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent"
+                    required
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-300 mb-1">Organization</label>
+                  <label className="block text-xs font-bold text-ink-muted uppercase mb-1">Company</label>
                   <input
                     type="text"
-                    required
                     value={reviewForm.organization}
                     onChange={(e) => setReviewForm({ ...reviewForm, organization: e.target.value })}
-                    placeholder="e.g. Global Logistics Corp"
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-pink-500"
+                    placeholder="e.g. Fintech Global"
+                    className="w-full rounded-2xl border border-rule bg-sand/40 px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent"
+                    required
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1">Your Review & Takeaways</label>
+                <label className="block text-xs font-bold text-ink-muted uppercase mb-1">Star Rating</label>
+                <div className="flex gap-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setReviewForm({ ...reviewForm, rating: star })}
+                      className="p-1 text-amber-500 focus:outline-none"
+                    >
+                      <Star className={`w-5 h-5 ${star <= reviewForm.rating ? 'fill-amber-500' : 'text-ink-muted/30'}`} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-ink-muted uppercase mb-1">Your Review / Quote</label>
                 <textarea
-                  rows={4}
-                  required
                   value={reviewForm.quote}
                   onChange={(e) => setReviewForm({ ...reviewForm, quote: e.target.value })}
-                  placeholder="How did Accelerate with AI help your team or workflow? What was your favorite chapter?"
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-pink-500"
+                  rows={4}
+                  placeholder="Which strategy or chapter helped you most?..."
+                  className="w-full rounded-2xl border border-rule bg-sand/40 px-4 py-2.5 text-xs text-ink focus:outline-none focus:border-accent resize-none"
+                  required
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs shadow-lg shadow-pink-600/30 transition-all flex items-center justify-center gap-2"
+                className="btn-premium w-full py-3 rounded-full text-xs font-semibold flex items-center justify-center gap-2"
               >
-                <Send className="w-3.5 h-3.5" />
-                Submit Endorsement
+                <Send className="w-4 h-4" />
+                <span>Submit Endorsement</span>
               </button>
             </form>
           </div>

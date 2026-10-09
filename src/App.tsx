@@ -40,12 +40,12 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950">
+    <div className="min-h-screen bg-canvas text-ink flex flex-col selection:bg-accent selection:text-white transition-colors duration-200">
       
       {/* Toast Feedback */}
       <Toast message={toastMessage} onClose={() => setToastMessage(null)} />
 
-      {/* Global Navigation Bar */}
+      {/* Global Floating Glass Navigation Bar */}
       <Navbar
         activePage={activePage}
         setActivePage={handlePageChange}
@@ -85,7 +85,7 @@ export function App() {
         )}
       </main>
 
-      {/* Production Footer */}
+      {/* Footer */}
       <Footer setActivePage={handlePageChange} onShowToast={showToast} />
 
       {/* Interactive AI Book Assistant */}

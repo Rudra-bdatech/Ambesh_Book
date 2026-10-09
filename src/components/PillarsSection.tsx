@@ -46,7 +46,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
     ? BOOK_PILLARS
     : BOOK_PILLARS.filter(p => p.category === activeCategory);
 
-  const selectedPillar = BOOK_PILLARS[selectedPillarIndex];
+  const selectedPillar = BOOK_PILLARS[selectedPillarIndex] || BOOK_PILLARS[0];
   const CurrentIcon = ICON_MAP[selectedPillar.iconName] || BookOpen;
 
   const handleCopyFramework = (text: string) => {
@@ -56,36 +56,33 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
   };
 
   return (
-    <section id="pillars" className="py-24 relative overflow-hidden">
-      {/* Glow backgrounds */}
-      <div className="absolute top-1/3 -right-20 w-96 h-96 bg-cyan-600/10 blur-[120px] -z-10 rounded-full" />
-      <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-indigo-600/10 blur-[120px] -z-10 rounded-full" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pillars" className="py-20 md:py-24 relative overflow-hidden bg-canvas transition-colors">
+      <div className="container-edit">
         
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            Curriculum & Strategic Roadmap
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <div className="inline-flex items-center gap-2">
+            <span className="eyebrow eyebrow-indigo">
+              <Sparkles className="w-3.5 h-3.5" /> 10 Core Pillars & Blueprint
+            </span>
           </div>
-          <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl tracking-tight text-white">
-            10 Things This Book <span className="text-gradient-cyan">Will Teach You</span>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight text-ink">
+            What You'll <span className="text-gradient-brand">Master in This Book</span>
           </h2>
-          <p className="text-slate-300 text-base sm:text-lg">
-            From foundational AI mental models to advanced agent orchestration, explore the complete 10-part executive toolkit designed for exponential business scale.
+          <p className="text-ink-soft text-base sm:text-lg leading-relaxed">
+            From foundational AI mental models to advanced workflow automation, explore the complete 10-part executive blueprint designed for exponential business scale.
           </p>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all ${
                   activeCategory === cat
-                    ? 'bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/30'
-                    : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-white hover:border-slate-700'
+                    ? 'bg-accent text-white font-bold shadow-soft'
+                    : 'bg-sand/60 dark:bg-sand/30 text-ink-muted border border-rule hover:text-ink hover:border-accent/40'
                 }`}
               >
                 {cat}
@@ -94,11 +91,11 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
           </div>
         </div>
 
-        {/* Interactive Dual Column Display */}
+        {/* Dual Column Interactive View */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: 10 Pillars List */}
-          <div className="lg:col-span-5 space-y-3 max-h-[640px] overflow-y-auto pr-2 custom-scrollbar">
+          <div className="lg:col-span-5 space-y-3 max-h-[660px] overflow-y-auto pr-2 custom-scrollbar">
             {filteredPillars.map((pillar) => {
               const isSelected = selectedPillar.number === pillar.number;
 
@@ -108,15 +105,15 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
                   onClick={() => setSelectedPillarIndex(pillar.number - 1)}
                   className={`w-full text-left p-4 rounded-2xl transition-all duration-200 flex items-start gap-3.5 group border ${
                     isSelected
-                      ? 'bg-gradient-to-r from-slate-900 via-slate-900 to-cyan-950/40 border-cyan-500/60 shadow-lg shadow-cyan-950/50'
-                      : 'bg-slate-900/40 border-slate-800/80 hover:bg-slate-900/80 hover:border-slate-700'
+                      ? 'bg-sand/70 dark:bg-sand/40 border-accent shadow-soft'
+                      : 'bg-sand/30 dark:bg-sand/15 border-rule hover:bg-sand/60 hover:border-rule/80'
                   }`}
                 >
                   <div
                     className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 font-bold text-xs transition-colors ${
                       isSelected
-                        ? 'bg-cyan-500 text-slate-950 font-black shadow-md shadow-cyan-500/40'
-                        : 'bg-slate-800 text-slate-400 group-hover:bg-slate-700 group-hover:text-slate-200'
+                        ? 'bg-accent text-white font-black shadow-sm'
+                        : 'bg-sand dark:bg-sand/60 text-ink-muted group-hover:text-ink'
                     }`}
                   >
                     {pillar.number}
@@ -126,23 +123,23 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
                     <div className="flex items-center justify-between mb-1">
                       <h4
                         className={`text-sm font-bold truncate transition-colors ${
-                          isSelected ? 'text-cyan-300' : 'text-white group-hover:text-slate-100'
+                          isSelected ? 'text-accent' : 'text-ink group-hover:text-accent'
                         }`}
                       >
                         {pillar.title}
                       </h4>
-                      <span className="text-[10px] font-semibold text-slate-500 uppercase px-2 py-0.5 rounded bg-slate-800/60 shrink-0 ml-2">
+                      <span className="text-[10px] font-mono font-semibold text-ink-muted uppercase px-2 py-0.5 rounded bg-sand border border-rule/50 shrink-0 ml-2">
                         {pillar.category}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-ink-muted line-clamp-2 leading-relaxed">
                       {pillar.shortDesc}
                     </p>
                   </div>
 
                   <ChevronRight
                     className={`w-4 h-4 shrink-0 transition-transform ${
-                      isSelected ? 'text-cyan-400 translate-x-1' : 'text-slate-600 group-hover:text-slate-400'
+                      isSelected ? 'text-accent translate-x-1' : 'text-ink-muted group-hover:text-ink'
                     }`}
                   />
                 </button>
@@ -150,107 +147,106 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
             })}
           </div>
 
-          {/* Right Column: Detailed Pillar Focus Card */}
+          {/* Right Column: Selected Pillar Deep-Dive Detail */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950 border border-cyan-500/30 p-6 sm:p-8 shadow-2xl shadow-cyan-950/30 backdrop-blur-xl space-y-6">
+            <div className="rounded-3xl border border-rule bg-sand/40 dark:bg-sand/20 p-6 sm:p-8 shadow-soft backdrop-blur-xl relative overflow-hidden">
               
-              {/* Header inside Card */}
-              <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-slate-800">
+              {/* Header inside card */}
+              <div className="flex flex-wrap items-start justify-between gap-4 pb-6 border-b border-rule">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 text-white">
+                  <div className="w-12 h-12 rounded-2xl bg-accent text-white flex items-center justify-center shadow-md">
                     <CurrentIcon className="w-6 h-6" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold text-cyan-400 uppercase tracking-wider">
-                      Chapter {selectedPillar.number} Breakdown
+                    <span className="font-mono text-xs uppercase tracking-wider text-ink-muted">
+                      Pillar #{selectedPillar.number} • {selectedPillar.category}
                     </span>
-                    <h3 className="text-xl sm:text-2xl font-black text-white">
+                    <h3 className="text-xl sm:text-2xl font-display font-extrabold text-ink">
                       {selectedPillar.title}
                     </h3>
                   </div>
                 </div>
 
-                <div className="px-3 py-1 rounded-full text-xs font-bold bg-cyan-950/70 border border-cyan-500/40 text-cyan-300">
-                  {selectedPillar.category}
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Strategic Pillar</span>
                 </div>
               </div>
 
-              {/* Comprehensive Description */}
-              <div className="space-y-3">
-                <h4 className="text-xs uppercase font-bold tracking-wider text-slate-400">
-                  Executive Overview
-                </h4>
-                <p className="text-slate-200 text-sm sm:text-base leading-relaxed">
+              {/* Full Description */}
+              <div className="py-6 space-y-4">
+                <p className="text-sm sm:text-base text-ink-soft leading-relaxed">
                   {selectedPillar.fullDesc}
                 </p>
-              </div>
 
-              {/* Key Takeaways */}
-              <div className="space-y-3 pt-2">
-                <h4 className="text-xs uppercase font-bold tracking-wider text-slate-400">
-                  Core Implementation Takeaways
-                </h4>
-                <div className="space-y-2.5">
-                  {selectedPillar.keyTakeaways.map((takeaway, idx) => (
-                    <div key={idx} className="flex items-start gap-3 bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
-                      <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                      <p className="text-xs sm:text-sm text-slate-300 font-medium leading-normal">
-                        {takeaway}
+                {/* Key Takeaways Checklist */}
+                <div className="space-y-2.5 pt-2">
+                  <h4 className="text-xs uppercase font-mono font-bold tracking-wider text-ink-muted">
+                    Key Executive Takeaways:
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    {selectedPillar.keyTakeaways.map((takeaway, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-start gap-2 p-2.5 rounded-xl bg-sand/60 dark:bg-sand/30 border border-rule/70 text-xs text-ink"
+                      >
+                        <CheckCircle className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <span className="font-medium leading-relaxed">{takeaway}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Practical Framework Prompt Box */}
+                {selectedPillar.samplePromptOrFramework && (
+                  <div className="pt-3">
+                    <div className="rounded-2xl bg-sand/80 dark:bg-[#071123]/80 border border-rule p-4 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-bold text-accent">
+                          ⚡ Ready-to-Use Implementation Framework:
+                        </span>
+                        <button
+                          onClick={() => handleCopyFramework(selectedPillar.samplePromptOrFramework || '')}
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-ink-muted hover:text-ink transition-colors px-2 py-1 rounded-lg border border-rule bg-canvas"
+                        >
+                          {copiedPrompt ? (
+                            <>
+                              <Check className="w-3.5 h-3.5 text-emerald-500" />
+                              <span className="text-emerald-500 font-bold">Copied!</span>
+                            </>
+                          ) : (
+                            <>
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>Copy Framework</span>
+                            </>
+                          )}
+                        </button>
+                      </div>
+                      <p className="font-mono text-xs text-ink-soft bg-canvas/60 p-3 rounded-xl border border-rule/50 leading-relaxed overflow-x-auto">
+                        {selectedPillar.samplePromptOrFramework}
                       </p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
               </div>
 
-              {/* Sample Prompt or Framework Box */}
-              {selectedPillar.samplePromptOrFramework && (
-                <div className="space-y-2 pt-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase font-bold tracking-wider text-amber-400 flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      Executive Tool & Template
-                    </span>
-                    <button
-                      onClick={() => handleCopyFramework(selectedPillar.samplePromptOrFramework!)}
-                      className="text-xs text-slate-400 hover:text-white flex items-center gap-1 bg-slate-800 px-2.5 py-1 rounded-lg transition-colors"
-                    >
-                      {copiedPrompt ? (
-                        <>
-                          <Check className="w-3 h-3 text-emerald-400" />
-                          <span className="text-emerald-400 font-semibold">Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3" />
-                          <span>Copy</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  <div className="p-3.5 rounded-xl bg-slate-950 font-mono text-xs text-cyan-300 border border-slate-800 overflow-x-auto">
-                    {selectedPillar.samplePromptOrFramework}
-                  </div>
-                </div>
-              )}
-
-              {/* Card Footer Actions */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-800">
+              {/* Bottom Actions inside detail card */}
+              <div className="pt-4 border-t border-rule flex flex-col sm:flex-row items-center justify-between gap-3">
                 <button
                   onClick={onOpenSampleModal}
-                  className="w-full sm:w-auto text-xs font-semibold text-cyan-300 hover:text-white flex items-center justify-center gap-1.5"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-rule bg-canvas text-xs font-semibold text-ink hover:border-accent hover:text-accent transition-all"
                 >
-                  <BookOpen className="w-3.5 h-3.5" />
-                  Read Free Chapter Excerpt
+                  <BookOpen className="w-3.5 h-3.5 text-accent" />
+                  <span>Read Free Sample Chapter</span>
                 </button>
 
                 <a
                   href={BOOK_INFO.kindleLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-1.5"
+                  className="btn-premium w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold"
                 >
-                  <span>Unlock Full Chapter on Amazon</span>
+                  <span>Get Full Book on Amazon</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </a>
               </div>

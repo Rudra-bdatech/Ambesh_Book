@@ -8,7 +8,7 @@ export const BookChatAssistant: React.FC = () => {
   const [messages, setMessages] = useState<Array<{ sender: 'bot' | 'user'; text: string; time: string }>>([
     {
       sender: 'bot',
-      text: "👋 Hi there! I'm the **Accelerate with AI** AI Assistant. Ask me anything about Ambesh Tiwari's book, the 10 business chapters, expert endorsements, or key AI strategies!",
+      text: "👋 Hi there! I'm the **Accelerate with AI** Assistant. Ask me anything about Ambesh Tiwari's book, the 10 business chapters, expert endorsements, or key AI strategies!",
       time: 'Just now'
     }
   ]);
@@ -55,8 +55,8 @@ export const BookChatAssistant: React.FC = () => {
           `You can read Chapter 1 free right now on the site or grab your copy on Amazon!`;
       } else if (lower.includes('ambesh') || lower.includes('author') || lower.includes('startupaccel') || lower.includes('who')) {
         reply = `**About Ambesh Tiwari:**\n\n` +
-          `Ambesh Tiwari is a seasoned growth consultant, entrepreneur, and AI strategist with over a decade of experience in business transformation. He is the founder of **StartupAccel** and the author of the Amazon #1 Bestseller *Accelerate with AI*.\n\n` +
-          `He blends deep engineering acumen with marketing & growth strategies to help businesses of all sizes deploy pragmatic AI tools.`;
+          `Ambesh Tiwari is one of India's leading AI trainers, growth consultants, and author of *Accelerate with AI*. He has trained 5,000+ professionals across 50+ organisations in 11 industries and is founder of BDA Technologies.\n\n` +
+          `He blends deep engineering acumen with operational systems to help businesses deploy pragmatic AI.`;
       } else if (lower.includes('buy') || lower.includes('amazon') || lower.includes('price') || lower.includes('kindle') || lower.includes('paperback') || lower.includes('copy') || lower.includes('order')) {
         reply = `You can get *Accelerate with AI* immediately on **Amazon** in both Kindle eBook and Paperback editions:\n\n` +
           `🛒 [Get Your Copy on Amazon](${BOOK_INFO.kindleLink})\n\n` +
@@ -97,36 +97,36 @@ export const BookChatAssistant: React.FC = () => {
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="relative group p-4 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 text-white shadow-2xl shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-3 border border-white/20"
+          className="btn-premium p-3.5 sm:px-4 sm:py-3.5 rounded-full flex items-center gap-3 shadow-lift transition-all hover:scale-105"
           aria-label="Open AI Book Assistant"
         >
-          <div className="relative">
-            <Bot className="w-6 h-6 animate-pulse" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-slate-900" />
+          <div className="relative flex items-center justify-center">
+            <Bot className="w-5 h-5" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full" />
           </div>
           <div className="hidden sm:block text-left">
             <p className="text-xs font-bold leading-tight">Ask Ambesh AI</p>
-            <p className="text-[10px] text-cyan-100 font-medium">Book & Strategy Companion</p>
+            <p className="text-[10px] opacity-85">Book Companion</p>
           </div>
         </button>
       ) : (
-        <div className="w-[360px] sm:w-[400px] h-[520px] rounded-3xl bg-slate-900/95 border border-cyan-500/30 shadow-2xl shadow-black/80 flex flex-col backdrop-blur-2xl overflow-hidden animate-fadeIn">
+        <div className="w-[340px] sm:w-[380px] h-[500px] rounded-3xl bg-canvas border border-rule shadow-lift flex flex-col backdrop-blur-2xl overflow-hidden animate-fadeIn">
           
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-950 border-b border-slate-800 flex items-center justify-between">
+          <div className="p-4 bg-sand/60 dark:bg-sand/30 border-b border-rule flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
-                <Bot className="w-5 h-5" />
+              <div className="w-8 h-8 rounded-xl bg-accent text-white flex items-center justify-center shadow-sm">
+                <Bot className="w-4 h-4" />
               </div>
               <div>
-                <h4 className="text-xs font-bold text-white flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-ink flex items-center gap-1.5">
                   Accelerate AI Assistant
-                  <span className="px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[9px] font-extrabold">
+                  <span className="px-1.5 py-0.5 rounded bg-accent/10 text-accent text-[9px] font-mono font-bold">
                     AI
                   </span>
                 </h4>
-                <p className="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <p className="text-[10px] text-emerald-500 font-medium flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                   Online • Ambesh Tiwari Book Knowledge
                 </p>
               </div>
@@ -134,7 +134,7 @@ export const BookChatAssistant: React.FC = () => {
 
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded-full hover:bg-sand text-ink-muted hover:text-ink transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -148,19 +148,23 @@ export const BookChatAssistant: React.FC = () => {
                 className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {msg.sender === 'bot' && (
-                  <div className="w-6 h-6 rounded-lg bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0 mt-0.5">
+                  <div className="w-6 h-6 rounded-lg bg-accent text-white flex items-center justify-center shrink-0 text-[10px]">
                     <Bot className="w-3.5 h-3.5" />
                   </div>
                 )}
                 <div
-                  className={`p-3 rounded-2xl max-w-[82%] leading-relaxed ${
+                  className={`max-w-[82%] p-3 rounded-2xl leading-relaxed whitespace-pre-line ${
                     msg.sender === 'user'
-                      ? 'bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-tr-none'
-                      : 'bg-slate-800/90 text-slate-200 border border-slate-700/60 rounded-tl-none whitespace-pre-line'
+                      ? 'bg-accent text-white rounded-br-none shadow-sm'
+                      : 'bg-sand/70 dark:bg-sand/40 text-ink border border-rule rounded-bl-none'
                   }`}
                 >
                   <p>{msg.text}</p>
-                  <span className="block text-[9px] text-slate-400 mt-1 opacity-70 text-right">
+                  <span
+                    className={`block text-[9px] mt-1 text-right ${
+                      msg.sender === 'user' ? 'text-white/70' : 'text-ink-muted'
+                    }`}
+                  >
                     {msg.time}
                   </span>
                 </div>
@@ -168,51 +172,45 @@ export const BookChatAssistant: React.FC = () => {
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-2 text-slate-400 text-xs">
-                <div className="w-6 h-6 rounded-lg bg-cyan-950 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
-                  <Bot className="w-3.5 h-3.5" />
-                </div>
-                <div className="bg-slate-800 px-3 py-2 rounded-2xl flex gap-1 items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce delay-100" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-bounce delay-200" />
-                </div>
+              <div className="flex gap-2 items-center text-ink-muted text-xs">
+                <Bot className="w-4 h-4 text-accent" />
+                <span className="animate-pulse">Analyzing book insights...</span>
               </div>
             )}
           </div>
 
-          {/* Quick Suggestions */}
-          <div className="px-3 py-2 bg-slate-950 border-t border-slate-800 overflow-x-auto flex gap-1.5 whitespace-nowrap no-scrollbar">
-            {suggestedQuestions.map((sq, i) => (
+          {/* Suggested Quick Prompts */}
+          <div className="px-3 py-2 bg-sand/30 dark:bg-sand/15 border-t border-rule flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
+            {suggestedQuestions.map((q, idx) => (
               <button
-                key={i}
-                onClick={() => handleSend(sq)}
-                className="px-2.5 py-1 rounded-full bg-slate-800/80 hover:bg-cyan-950 hover:border-cyan-500/50 border border-slate-700 text-[10px] text-slate-300 hover:text-cyan-300 transition-colors shrink-0"
+                key={idx}
+                onClick={() => handleSend(q)}
+                className="whitespace-nowrap px-2.5 py-1 rounded-full bg-canvas border border-rule text-[10px] text-ink-soft hover:text-accent hover:border-accent transition-all shrink-0"
               >
-                {sq}
+                {q}
               </button>
             ))}
           </div>
 
-          {/* Input Bar */}
+          {/* Input Box */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
             }}
-            className="p-3 bg-slate-950 border-t border-slate-800 flex items-center gap-2"
+            className="p-3 bg-canvas border-t border-rule flex items-center gap-2"
           >
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              placeholder="Ask about AI strategies, chapters, author..."
-              className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-500"
+              placeholder="Ask a question about the book..."
+              className="flex-1 bg-sand/50 dark:bg-sand/20 border border-rule rounded-full px-4 py-2 text-xs text-ink placeholder:text-ink-muted focus:outline-none focus:border-accent"
             />
             <button
               type="submit"
               disabled={!inputMessage.trim()}
-              className="p-2 rounded-xl bg-cyan-500 disabled:opacity-50 text-slate-950 font-bold hover:bg-cyan-400 transition-colors"
+              className="p-2 rounded-full bg-accent text-white hover:opacity-90 disabled:opacity-40 transition-all shrink-0"
             >
               <Send className="w-3.5 h-3.5" />
             </button>

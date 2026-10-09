@@ -49,16 +49,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
       <PillarsSection onOpenSampleModal={onOpenSampleModal} />
 
       {/* Author Spotlight Teaser */}
-      <section className="py-20 bg-slate-950/70 border-y border-slate-900 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-canvas border-y border-rule relative overflow-hidden transition-colors">
+        <div className="container-edit">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
-            {/* Author Cutout & Image Collage */}
+            {/* Author Cutout & Image */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative max-w-sm w-full">
-                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 rounded-3xl blur-2xl -z-10 scale-95" />
-                
-                <div className="relative rounded-3xl bg-slate-900/80 border border-slate-800 p-4 shadow-2xl overflow-hidden group">
+                <div className="relative rounded-3xl bg-sand/50 dark:bg-sand/20 border border-rule p-4 shadow-soft overflow-hidden group">
                   <img
                     src="/assets/Ambesh-.png"
                     alt="Ambesh Tiwari"
@@ -66,9 +64,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
                   />
                   
                   {/* Overlay Badge */}
-                  <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-slate-950/90 backdrop-blur-md border border-cyan-500/30 space-y-1">
-                    <p className="text-white font-bold text-sm">{AUTHOR_BIO.name}</p>
-                    <p className="text-xs text-cyan-400 font-medium">Founder, StartupAccel & AI Strategist</p>
+                  <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-canvas/90 backdrop-blur-md border border-rule space-y-1 shadow-sm">
+                    <p className="text-ink font-bold text-sm">{AUTHOR_BIO.name}</p>
+                    <p className="text-xs text-accent font-medium">Founder, BDA Technologies & AI Trainer</p>
                   </div>
                 </div>
               </div>
@@ -76,27 +74,28 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
 
             {/* Author Story Copy */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
-                <User className="w-3.5 h-3.5" />
-                Meet The Author
+              <div className="inline-flex items-center gap-2">
+                <span className="eyebrow eyebrow-indigo">
+                  <User className="w-3.5 h-3.5" /> Meet The Author
+                </span>
               </div>
 
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
-                Engineering Know-How Blended with <span className="text-gradient-cyan">Marketing Mastery</span>
+              <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-ink tracking-tight">
+                Engineering Know-How Blended with <span className="text-gradient-brand">Strategic Execution</span>
               </h2>
 
-              <p className="text-slate-300 text-base leading-relaxed">
+              <p className="text-ink-soft text-base leading-relaxed">
                 {AUTHOR_BIO.shortBio}
               </p>
 
               {/* Stats Bar */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-2">
                 {AUTHOR_BIO.stats.map((stat, idx) => (
-                  <div key={idx} className="p-3.5 rounded-2xl bg-slate-900/60 border border-slate-800 text-center">
-                    <div className="font-display font-black text-xl text-cyan-400">
+                  <div key={idx} className="p-4 rounded-2xl bg-sand/40 dark:bg-sand/20 border border-rule text-center">
+                    <div className="font-display font-black text-xl sm:text-2xl text-accent">
                       {stat.value}
                     </div>
-                    <div className="text-[11px] text-slate-400 font-medium mt-0.5">
+                    <div className="text-[11px] text-ink-muted font-medium mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -110,9 +109,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
                     setActivePage('about');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold shadow-lg shadow-cyan-500/25 transition-all flex items-center gap-2"
+                  className="btn-premium px-6 py-3 rounded-full text-xs font-semibold flex items-center gap-2"
                 >
-                  <span>Read Ambesh's Full Story & Vision</span>
+                  <span>Read Ambesh's Full Story</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
 
@@ -121,7 +120,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
                     href={AUTHOR_BIO.socials.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 text-slate-400 transition-colors"
+                    aria-label="LinkedIn"
+                    className="p-2.5 rounded-full border border-rule text-ink-muted hover:border-accent hover:text-accent transition-colors"
                   >
                     <LinkedInIcon className="w-4 h-4" />
                   </a>
@@ -129,7 +129,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
                     href={AUTHOR_BIO.socials.twitter}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500 hover:text-cyan-400 text-slate-400 transition-colors"
+                    aria-label="Twitter / X"
+                    className="p-2.5 rounded-full border border-rule text-ink-muted hover:border-accent hover:text-accent transition-colors"
                   >
                     <TwitterIcon className="w-4 h-4" />
                   </a>
@@ -148,51 +149,53 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenSampleModal, setActive
       {/* Expert Endorsements & Wall of Love */}
       <ExpertEndorsements />
 
-      {/* Interactive AI Readiness Quiz Scorecard */}
+      {/* Interactive AI Readiness Quiz */}
       <AiReadinessQuiz onOpenSampleModal={onOpenSampleModal} />
 
-      {/* Frequently Asked Questions */}
-      <section className="py-24 bg-slate-950 relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* FAQ Accordion Section */}
+      <section className="py-20 bg-canvas relative overflow-hidden transition-colors">
+        <div className="container-edit max-w-4xl">
           
-          <div className="text-center mb-14 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-cyan-400 text-xs font-bold uppercase tracking-wider">
-              <HelpCircle className="w-3.5 h-3.5" />
-              Got Questions?
+          <div className="text-center mb-12 space-y-3">
+            <div className="inline-flex items-center gap-2">
+              <span className="eyebrow eyebrow-indigo">
+                <HelpCircle className="w-3.5 h-3.5" /> Frequently Asked Questions
+              </span>
             </div>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight">
-              Frequently Asked <span className="text-gradient-cyan">Questions</span>
+            <h2 className="font-display font-extrabold text-3xl sm:text-4xl text-ink tracking-tight">
+              Everything You Need <span className="text-gradient-brand">To Know</span>
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
-              Everything you need to know about Accelerate with AI, formats, and corporate engagements.
+            <p className="text-ink-soft text-sm sm:text-base">
+              Got questions before getting started? Here are answers to commonly asked questions.
             </p>
           </div>
 
-          <div className="space-y-3.5">
-            {FAQ_ITEMS.map((faq, index) => {
-              const isOpen = openFaqIndex === index;
+          <div className="space-y-3">
+            {FAQ_ITEMS.map((item, idx) => {
+              const isOpen = openFaqIndex === idx;
+
               return (
                 <div
-                  key={index}
-                  className="rounded-2xl bg-slate-900/60 border border-slate-800/80 overflow-hidden transition-all duration-200"
+                  key={idx}
+                  className="rounded-2xl bg-sand/30 dark:bg-sand/15 border border-rule overflow-hidden transition-all duration-200"
                 >
                   <button
-                    onClick={() => toggleFaq(index)}
-                    className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 focus:outline-none"
+                    onClick={() => toggleFaq(idx)}
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 focus:outline-none"
                   >
-                    <span className="font-bold text-sm sm:text-base text-white">
-                      {faq.q}
+                    <span className="font-display font-bold text-sm sm:text-base text-ink">
+                      {item.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 text-cyan-400 shrink-0 transition-transform duration-300 ${
-                        isOpen ? 'rotate-180' : ''
+                      className={`w-4 h-4 text-ink-muted shrink-0 transition-transform duration-200 ${
+                        isOpen ? 'rotate-180 text-accent' : ''
                       }`}
                     />
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 sm:px-6 pb-6 pt-0 text-slate-300 text-xs sm:text-sm leading-relaxed border-t border-slate-800/40 animate-fadeIn">
-                      <p className="pt-4">{faq.a}</p>
+                    <div className="px-5 pb-5 text-xs sm:text-sm text-ink-soft leading-relaxed border-t border-rule/40 pt-3">
+                      {item.a}
                     </div>
                   )}
                 </div>
