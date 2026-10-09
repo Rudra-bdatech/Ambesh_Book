@@ -49,57 +49,67 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onShowToast }) =>
   ];
 
   return (
-    <footer className="border-t border-rule bg-canvas relative overflow-hidden transition-colors duration-300">
-      <div className="container-edit pt-16 pb-12">
-        {/* Top: Premium Dark CTA Panel (Exact Ambesh V2 Style with Toolkit Content) */}
-        <div className="cta-dark mb-14 rounded-3xl p-8 sm:p-12 md:p-14 shadow-lift relative overflow-hidden">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
-            
-            {/* Left Column */}
-            <div className="lg:col-span-7">
-              <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
-                FREE COMPANION RESOURCE
-              </p>
+    <>
+      {/* Companion Toolkit CTA Section with Alternating Sand/Grid Background */}
+      <section className="relative isolate overflow-hidden bg-canvas bg-premium-side-gradient py-16 md:py-24 border-t border-rule transition-colors">
+        {/* Alternating light-mode grid */}
+        <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+
+        <div className="container-edit relative">
+          <div className="cta-dark rounded-3xl p-8 sm:p-12 md:p-14 shadow-lift relative overflow-hidden">
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               
-              <h3 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-white">
-                Get the Official 50+ <span className="font-serif italic text-gradient-brand">AI Prompts & SOP</span> Toolkit
-              </h3>
+              {/* Left Column */}
+              <div className="lg:col-span-7">
+                <p className="font-mono text-xs uppercase tracking-[0.25em] text-white/50">
+                  FREE COMPANION RESOURCE
+                </p>
+                
+                <h3 className="mt-4 font-display text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight tracking-tight text-white">
+                  Get the Official 50+ <span className="font-serif italic text-gradient-brand">AI Prompts & SOP</span> Toolkit
+                </h3>
 
-              <p className="mt-3 text-sm sm:text-base text-white/70 max-w-xl leading-relaxed">
-                Every reader gets instant access to Ambesh Tiwari's actionable frameworks, workflow templates, and executive prompt library.
-              </p>
+                <p className="mt-3 text-sm sm:text-base text-white/70 max-w-xl leading-relaxed">
+                  Every reader gets instant access to Ambesh Tiwari's actionable frameworks, workflow templates, and executive prompt library.
+                </p>
+              </div>
+
+              {/* Right Column: Form */}
+              <div className="lg:col-span-5">
+                {subscribed ? (
+                  <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300">
+                    <CheckCircle2 className="w-5 h-5 shrink-0" />
+                    <span className="text-sm font-semibold">Check your inbox! 50+ Prompts Toolkit sent successfully.</span>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Enter your work email..."
+                      className="h-12 sm:h-14 flex-1 rounded-full border border-white/15 bg-white/5 px-6 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none backdrop-blur-sm"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="btn-premium inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold shrink-0 text-white shadow-soft"
+                    >
+                      <Mail className="h-4 w-4" />
+                      <span>Get Free Toolkit</span>
+                    </button>
+                  </form>
+                )}
+              </div>
+
             </div>
-
-            {/* Right Column: Form */}
-            <div className="lg:col-span-5">
-              {subscribed ? (
-                <div className="flex items-center gap-3 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300">
-                  <CheckCircle2 className="w-5 h-5 shrink-0" />
-                  <span className="text-sm font-semibold">Check your inbox! 50+ Prompts Toolkit sent successfully.</span>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your work email..."
-                    className="h-12 sm:h-14 flex-1 rounded-full border border-white/15 bg-white/5 px-6 text-sm text-white placeholder:text-white/40 focus:border-white/40 focus:outline-none backdrop-blur-sm"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="btn-premium inline-flex h-12 sm:h-14 items-center justify-center gap-2 rounded-full px-7 text-sm font-semibold shrink-0 text-white shadow-soft"
-                  >
-                    <Mail className="h-4 w-4" />
-                    <span>Get Free Toolkit</span>
-                  </button>
-                </form>
-              )}
-            </div>
-
           </div>
         </div>
+      </section>
+
+      {/* Main Footer (Pure White Canvas) */}
+      <footer className="border-t border-rule bg-canvas relative overflow-hidden transition-colors duration-300">
+        <div className="container-edit pt-16 pb-12">
 
         {/* Middle: Brand + Nav Columns */}
         <div className="grid gap-12 md:grid-cols-12">
@@ -228,5 +238,6 @@ export const Footer: React.FC<FooterProps> = ({ setActivePage, onShowToast }) =>
         </div>
       </div>
     </footer>
+    </>
   );
 };
