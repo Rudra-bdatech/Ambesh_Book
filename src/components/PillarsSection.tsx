@@ -20,6 +20,8 @@ import { BOOK_PILLARS, BOOK_INFO } from '../data/bookData';
 
 interface PillarsSectionProps {
   onOpenSampleModal: () => void;
+  bgVariant?: 'grid' | 'canvas';
+  hideHeading?: boolean;
 }
 
 const ICON_MAP: Record<string, React.ElementType> = {
@@ -35,7 +37,11 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Rocket
 };
 
-export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModal }) => {
+export const PillarsSection: React.FC<PillarsSectionProps> = ({
+  onOpenSampleModal,
+  bgVariant = 'grid',
+  hideHeading = false,
+}) => {
   const [selectedPillarIndex, setSelectedPillarIndex] = useState(0);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('All');
@@ -55,14 +61,26 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
     setTimeout(() => setCopiedPrompt(false), 2500);
   };
 
+  const isGrid = bgVariant === 'grid';
+
   return (
-    <section id="pillars" className="py-20 md:py-24 relative isolate overflow-hidden bg-premium-side-gradient transition-colors">
+    <section
+      id="pillars"
+      className={`py-20 md:py-24 relative isolate overflow-hidden transition-colors ${
+        isGrid
+          ? 'bg-canvas bg-premium-side-gradient'
+          : 'bg-canvas border-y border-rule'
+      }`}
+    >
       {/* Alternating light-mode grid */}
-      <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+      {isGrid && (
+        <div className="home-grid-light pointer-events-none absolute inset-0" aria-hidden />
+      )}
 
       <div className="container-edit relative">
         
         {/* Section Heading */}
+        {!hideHeading && (
         <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
           <div className="inline-flex items-center gap-2">
             <span className="eyebrow eyebrow-indigo">
@@ -93,6 +111,7 @@ export const PillarsSection: React.FC<PillarsSectionProps> = ({ onOpenSampleModa
             ))}
           </div>
         </div>
+        )}
 
         {/* Dual Column Interactive View */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
