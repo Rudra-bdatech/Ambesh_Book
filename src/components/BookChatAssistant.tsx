@@ -110,7 +110,10 @@ export const BookChatAssistant: React.FC = () => {
           </div>
         </button>
       ) : (
-        <div className="w-[340px] sm:w-[380px] h-[500px] rounded-3xl bg-canvas border border-rule shadow-lift flex flex-col backdrop-blur-2xl overflow-hidden animate-fadeIn">
+        <div
+          data-lenis-prevent
+          className="w-[340px] sm:w-[380px] h-[500px] rounded-3xl bg-canvas border border-rule shadow-lift flex flex-col backdrop-blur-2xl overflow-hidden animate-fadeIn"
+        >
           
           {/* Header */}
           <div className="p-4 bg-sand/60 dark:bg-sand/30 border-b border-rule flex items-center justify-between">
@@ -141,7 +144,10 @@ export const BookChatAssistant: React.FC = () => {
           </div>
 
           {/* Messages Feed */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 custom-scrollbar text-xs">
+          <div
+            data-lenis-prevent
+            className="flex-1 p-4 overflow-y-auto space-y-3.5 custom-scrollbar text-xs overscroll-contain"
+          >
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -180,7 +186,10 @@ export const BookChatAssistant: React.FC = () => {
           </div>
 
           {/* Suggested Quick Prompts */}
-          <div className="px-3 py-2 bg-sand/30 dark:bg-sand/15 border-t border-rule flex items-center gap-1.5 overflow-x-auto custom-scrollbar">
+          <div
+            data-lenis-prevent
+            className="px-3 py-2 bg-sand/30 dark:bg-sand/15 border-t border-rule flex items-center gap-1.5 overflow-x-auto custom-scrollbar overscroll-contain"
+          >
             {suggestedQuestions.map((q, idx) => (
               <button
                 key={idx}

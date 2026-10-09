@@ -16,12 +16,13 @@ export const BOOK_INFO: BookInfo = {
 };
 
 export const MEDIA_FEATURES: MediaFeature[] = [
-  { name: 'Media Partner 1', logoUrl: '/assets/1-1.png' },
-  { name: 'Media Partner 2', logoUrl: '/assets/2-1.png' },
-  { name: 'Media Partner 3', logoUrl: '/assets/3.png' },
-  { name: 'Media Partner 4', logoUrl: '/assets/4-1.png' },
-  { name: 'Media Partner 5', logoUrl: '/assets/5.png' },
-  { name: 'Media Partner 6', logoUrl: '/assets/6.png' },
+  { name: 'Mid-day', logoUrl: '/logos/mid-day.png' },
+  { name: 'Disrupt', logoUrl: '/logos/disrupt.png' },
+  { name: 'Navbharat Times', logoUrl: '/logos/navbharat-times.png' },
+  { name: 'Dailyhunt', logoUrl: '/logos/dailyhunt-full.png' },
+  { name: 'Thrive Global', logoUrl: '/logos/thrive-global.svg' },
+  { name: 'NewsTrack', logoUrl: '/logos/newstrack.jpg' },
+  { name: 'Forbes India', logoUrl: '/logos/forbes-india.svg' },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

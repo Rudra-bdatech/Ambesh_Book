@@ -11,7 +11,7 @@ export const MediaBanner: React.FC = () => {
         </p>
         <div className="mt-4">
           <Marquee
-            fade={36}
+            fade={40}
             speed={45}
             fadeColor="var(--canvas)"
             items={MEDIA_FEATURES.map((media, index) => (
@@ -20,7 +20,7 @@ export const MediaBanner: React.FC = () => {
                 src={media.logoUrl}
                 alt={media.name}
                 title={media.name}
-                className="h-8 sm:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300 dark:brightness-110"
+                className="h-6 sm:h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-all duration-300 dark:brightness-110"
                 loading="lazy"
               />
             ))}

@@ -33,8 +33,14 @@ export const SampleChapterModal: React.FC<SampleChapterModalProps> = ({ isOpen, 
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fadeIn">
-      <div className="relative w-full max-w-3xl rounded-3xl bg-canvas border border-rule shadow-lift flex flex-col max-h-[90vh] overflow-hidden">
+    <div
+      data-lenis-prevent
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/60 dark:bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fadeIn"
+    >
+      <div
+        data-lenis-prevent
+        className="relative w-full max-w-3xl rounded-3xl bg-canvas border border-rule shadow-lift flex flex-col max-h-[90vh] overflow-hidden"
+      >
         
         {/* Modal Top Bar */}
         <div className="p-4 sm:p-5 border-b border-rule bg-sand/60 dark:bg-sand/30 flex items-center justify-between gap-4">
