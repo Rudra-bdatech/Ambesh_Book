@@ -133,13 +133,14 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                     : "h-10 px-5 text-xs gap-2 shadow-md"
                 }`}
               >
-                <span className="relative z-10 flex items-center justify-center gap-1.5">
-                  <AmazonIcon className={`${scrolled ? "h-4 w-4" : "h-3.5 w-3.5"} shrink-0 transition-transform duration-300 group-hover:scale-110`} />
-                  {!scrolled && (
-                    <>
+                <span className="relative z-10 flex items-center justify-center">
+                  {scrolled ? (
+                    <AmazonIcon className="h-4.5 w-4.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                  ) : (
+                    <span className="flex items-center gap-2">
                       <span>Get on Amazon</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                    </>
+                    </span>
                   )}
                 </span>
               </a>
@@ -301,8 +302,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                       onClick={() => setOpen(false)}
                       className="btn-premium w-full justify-center py-3 rounded-full text-sm font-semibold flex items-center gap-2"
                     >
-                      <AmazonIcon className="h-4 w-4 shrink-0" />
-                      Get on Amazon
+                      <span>Get on Amazon</span>
                       <ArrowRight className="h-4 w-4" />
                     </a>
                   </motion.div>
