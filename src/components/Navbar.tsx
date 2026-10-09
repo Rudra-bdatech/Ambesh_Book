@@ -79,8 +79,10 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               : "max-w-[70rem] rounded-full py-3.5 px-4 min-[400px]:px-6 md:px-8 border-white/25"
           }`}
         transition={{
-          duration: 0.35,
-          ease: [0.16, 1, 0.3, 1]
+          type: "spring",
+          stiffness: 280,
+          damping: 28,
+          mass: 0.7
         }}
       >
         <div className="flex items-center justify-between gap-2">
@@ -91,8 +93,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
             <img
               src="/atlogo.jpeg"
               alt="Ambesh Tiwari logo"
-              className={`h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-500 group-hover:scale-105 ${scrolled ? "scale-85" : "scale-100"
-                }`}
+              className="h-9 w-9 shrink-0 rounded-lg object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <span className="font-display text-sm font-bold tracking-tight text-ink md:text-base whitespace-nowrap">
               Ambesh Tiwari
@@ -104,11 +105,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`whitespace-nowrap rounded-full border border-transparent transition-all duration-300 ${
-                  scrolled
-                    ? "px-2.5 py-1.5 text-xs font-medium"
-                    : "px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] font-medium"
-                } ${
+                className={`whitespace-nowrap rounded-full border border-transparent px-3 py-1.5 lg:px-3.5 lg:py-2 text-[13px] font-medium transition-colors duration-200 ${
                   activePage === item.id
                     ? "bg-accent text-accent-foreground shadow-lift font-semibold"
                     : "text-ink-soft hover:text-ink hover:bg-accent/10"
@@ -135,21 +132,23 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                     : "h-10 px-5 text-xs shadow-md"
                 }`}
                 transition={{
-                  duration: 0.32,
-                  ease: [0.16, 1, 0.3, 1]
+                  type: "spring",
+                  stiffness: 280,
+                  damping: 28,
+                  mass: 0.7
                 }}
               >
                 <AnimatePresence mode="popLayout" initial={false}>
                   {scrolled ? (
                     <motion.span
                       key="amazon-icon"
-                      initial={{ opacity: 0, scale: 0.6 }}
+                      initial={{ opacity: 0, scale: 0.7 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.6 }}
-                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      exit={{ opacity: 0, scale: 0.7 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
                       className="relative z-10 flex items-center justify-center"
                     >
-                      <AmazonIcon className="h-4.5 w-4.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                      <AmazonIcon className="h-5.5 w-5.5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
                     </motion.span>
                   ) : (
                     <motion.span
@@ -157,7 +156,7 @@ export function Navbar({ activePage, setActivePage, onOpenSampleModal: _onOpenSa
                       initial={{ opacity: 0, scale: 0.85 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.85 }}
-                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
                       className="relative z-10 flex items-center gap-2 whitespace-nowrap"
                     >
                       <span>Get on Amazon</span>
